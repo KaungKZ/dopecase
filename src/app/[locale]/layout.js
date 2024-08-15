@@ -5,7 +5,12 @@ import "@mantine/core/styles.css";
 import localFont from "next/font/local";
 import NextTopLoader from "nextjs-toploader";
 import PropTypes from "prop-types";
-import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
+import {
+  ColorSchemeScript,
+  MantineProvider,
+  createTheme,
+  Input,
+} from "@mantine/core";
 import "../globals.css";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -20,12 +25,24 @@ const playfair = localFont({
   variable: "--font-playfair",
 });
 
+const recursive = localFont({
+  src: "../../../public/fonts/Recursive-VariableFont_CASL,CRSV,MONO,slnt,wght.ttf",
+  variable: "--font-recursive",
+});
+
 export const metadata = {
   title: "My Mantine app",
   description: "I have followed setup instructions carefully",
 };
 
 const theme = createTheme({
+  components: {
+    // Input: Input.extend({
+    //   classNames: {
+    //     input: "border: 1px solid var(--mantine-color-violet-filled)",
+    //   },
+    // }),
+  },
   colors: {
     primary: [
       "#aedbb6",
@@ -62,7 +79,7 @@ export default function RootLayout({ children, params }) {
       </head>
       <body
         suppressHydrationWarning
-        className={`${opensans.variable} ${playfair.variable}`}
+        className={`${opensans.variable} ${playfair.variable} ${recursive.variable}`}
       >
         <NextTopLoader color="#39ad5d" />
         {/* {children} */}

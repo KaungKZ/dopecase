@@ -78,6 +78,7 @@ module.exports = {
       },
       fontFamily: {
         opensans: ["var(--font-opensans)"],
+        recursive: ["var(--font-recursive)"],
       },
       screens: {
         "2xl": { min: "1536px" },

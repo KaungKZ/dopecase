@@ -16,12 +16,14 @@ export default function ButtonComponent({
   color = "primary",
   transparent = false,
   nested = false,
+  type = "button",
 }) {
   return (
     <Button
       component={link ? Link : Button}
       href={link}
       color={color}
+      type={type}
       className={cn(
         "transition-colors",
         cls,
@@ -49,6 +51,7 @@ ButtonComponent.propTypes = {
   onClick: PropTypes.func,
   color: PropTypes.string,
   transparent: PropTypes.bool,
+  type: PropTypes.string,
 
   nested: PropTypes.bool,
 };
@@ -59,8 +62,9 @@ ButtonComponent.defaultProps = {
   link: "",
 
   onClick: () => {},
-  color: "",
+  color: "primary",
   transparent: false,
+  type: "button",
 
   nested: false,
 };

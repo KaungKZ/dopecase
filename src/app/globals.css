@@ -53,8 +53,24 @@
   * {
     @apply border-border;
   }
-  body {
+  /* body {
     @apply bg-background text-foreground font-opensans;
+  } */
+
+  p,
+  span,
+  input,
+  textarea {
+    @apply font-opensans;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-recursive;
   }
 }
 /* 
@@ -67,6 +83,14 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.mantine-Input-input:focus-within {
+  border-color: #6ebf81;
+}
+
+.mantine-Input-input[data-error="true"]:focus-within {
+  border-color: var(--input-color);
 }
 
 .phone-skew {
