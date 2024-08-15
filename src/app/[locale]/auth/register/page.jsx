@@ -10,7 +10,7 @@ export default function page() {
     <>
       <section>
         <MaxWidthWrapper>
-          <div className="mt-24">
+          <div className="mt-20">
             <div className="flex w-fit items-baseline">
               <h1 className="text-5xl font-bold w-full">Register</h1>
               <Image
@@ -18,6 +18,7 @@ export default function page() {
                 width={50}
                 height={50}
                 className="ml-2"
+                alt="register-icon"
               />
             </div>
             <h2 className="text-2xl mt-5">Get Started Today !</h2>

@@ -80,9 +80,16 @@ body {
 } */
 
 @layer utilities {
+  .input-label {
+    @apply font-semibold text-base mb-2 block;
+  }
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.mantine-Input-input {
+  min-height: 40px;
 }
 
 .mantine-Input-input:focus-within {

@@ -14,12 +14,14 @@ export default function SignupForm() {
   const validationSchema = Yup.object({
     name: Yup.string()
       .max(15, "Must be 15 characters or less")
-      .required("Required"),
+      .required("Name is required"),
     password: Yup.string()
-      .required("Required")
+      .required("Password is required")
       .min(8, "Password is too short - should be 8 chars minimum.")
       .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
-    email: Yup.string().email("Invalid email address").required("Required"),
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
   });
 
   function handleOnSubmit(values) {
@@ -33,15 +35,19 @@ export default function SignupForm() {
         onSubmit={handleOnSubmit}
       >
         {(formik) => (
-          <form onSubmit={formik.handleSubmit}>
+          <form
+            onSubmit={formik.handleSubmit}
+            className="mt-12 flex flex-col space-y-6"
+          >
             <div>
-              <label htmlFor="name" className="font-semibold text-md">
+              <label htmlFor="name" className="input-label">
                 Name
               </label>
               <TextInput
                 id="name"
                 placeholder=""
                 aria-label="Name"
+                className="min-h-14"
                 error={
                   formik.touched.name && formik.errors.name
                     ? formik.errors.name
@@ -49,15 +55,18 @@ export default function SignupForm() {
                 }
                 {...formik.getFieldProps("name")}
               />
+
+              {/* <div className="h-[15px] error-wrapper-empty"></div> */}
             </div>
             <div>
-              <label htmlFor="email" className="font-semibold text-md">
+              <label htmlFor="email" className="input-label">
                 Email
               </label>
               <TextInput
                 id="email"
                 placeholder=""
                 aria-label="Email"
+                className="min-h-14"
                 error={
                   formik.touched.email && formik.errors.email
                     ? formik.errors.email
@@ -76,13 +85,14 @@ export default function SignupForm() {
               <div>{formik.errors.firstName}</div>
             ) : null} */}
             <div>
-              <label htmlFor="password" className="font-semibold text-md">
+              <label htmlFor="password" className="input-label">
                 Password
               </label>
 
               <PasswordInput
                 id="password"
                 aria-label="Password"
+                className="min-h-14"
                 visible={visible}
                 onVisibilityChange={toggle}
                 error={
@@ -108,18 +118,22 @@ export default function SignupForm() {
             {formik.touched.email && formik.errors.email ? (
               <div>{formik.errors.email}</div>
             ) : null} */}
-            <ButtonComponent type="submit" cls="w-full min-h-10 text-base">
+            <ButtonComponent type="submit" cls="w-full min-h-11 text-base">
               Create your account
             </ButtonComponent>
           </form>
         )}
       </Formik>
-      <div>
-        <span>Or</span>
-        <div>
+      <div className="mb-8">
+        <div className="mt-8 mb-6 flex justify-center before:content:['*'] relative before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1/2 before:h-[1px] before:bg-slate-200 after:content:['*'] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:w-1/2 after:h-[1px] after:bg-slate-200">
+          <span className="w-fit bg-background font-medium text-center z-1 px-4">
+            Or
+          </span>
+        </div>
+        <div className="flex justify-center">
           <GoogleButton></GoogleButton>
         </div>
-        <span>
+        <span className="text-center block mt-4 text-sm">
           Already have an account ?{" "}
           <Link href="/auth/login" className="text-blue-600 font-medium">
             Sign In

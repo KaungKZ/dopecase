@@ -45,30 +45,35 @@ export default async function Home() {
                   width={40}
                   height={40}
                   className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100"
+                  alt="home-placeholder-user-1"
                 />
                 <Image
                   src="/users/user-2.png"
                   width={40}
                   height={40}
                   className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100"
+                  alt="home-placeholder-user-2"
                 />
                 <Image
                   src="/users/user-3.png"
                   width={40}
                   height={40}
                   className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100"
+                  alt="home-placeholder-user-3"
                 />
                 <Image
                   src="/users/user-4.jpg"
                   width={40}
                   height={40}
                   className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100"
+                  alt="home-placeholder-user-4"
                 />
                 <Image
                   src="/users/user-5.jpg"
                   width={40}
                   height={40}
                   className="inline-block h-10 w-10 rounded-full ring-2 object-cover ring-slate-100"
+                  alt="home-placeholder-user-5"
                 />
               </div>
               <div className="flex flex-col">
@@ -94,12 +99,14 @@ export default async function Home() {
                 width={256}
                 height={500}
                 className="absolute left-0 top-0"
+                alt="phone-template-white-edges"
               />
               <Image
                 src="/testimonials/1.jpg"
                 width={256}
                 height={500}
                 className=""
+                alt="testimonials-1"
               />
             </div>
             <Image
@@ -107,12 +114,14 @@ export default async function Home() {
               className="absolute -top-28 -right-40"
               width={208}
               height={140}
+              alt="your-image-placeholder"
             />
             <Image
               src="/line.png"
               className="absolute -left-7 -bottom-6"
               width={80}
               height={140}
+              alt="line-placeholder"
             />
           </div>
         </section>
