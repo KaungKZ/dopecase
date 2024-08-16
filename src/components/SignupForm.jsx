@@ -8,13 +8,16 @@ import { useDisclosure } from "@mantine/hooks";
 import ButtonComponent from "./ButtonComponent";
 import GoogleButton from "./GoogleButton";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { ConnectedFocusError } from "focus-formik-error";
 
 export default function SignupForm() {
   const [visible, { toggle }] = useDisclosure(false);
+  const router = useRouter();
   const validationSchema = Yup.object({
-    name: Yup.string()
+    username: Yup.string()
       .max(15, "Must be 15 characters or less")
-      .required("Name is required"),
+      .required("Username is required"),
     password: Yup.string()
       .required("Password is required")
       .min(8, "Password is too short - should be 8 chars minimum.")
@@ -24,8 +27,27 @@ export default function SignupForm() {
       .required("Email is required"),
   });
 
-  function handleOnSubmit(values) {
-    console.log(values);
+  async function handleOnSubmit(values) {
+    // console.log(values);
+    const res = await fetch("/api/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: values.username,
+        password: values.password,
+        email: values.email,
+      }),
+    });
+
+    console.log(res);
+
+    if (res.ok) {
+      router.push("/en");
+    } else {
+      console.error("Registration failed");
+    }
   }
   return (
     <>
@@ -39,21 +61,22 @@ export default function SignupForm() {
             onSubmit={formik.handleSubmit}
             className="mt-12 flex flex-col space-y-6"
           >
+            <ConnectedFocusError />
             <div>
-              <label htmlFor="name" className="input-label">
-                Name
+              <label htmlFor="username" className="input-label">
+                Username
               </label>
               <TextInput
-                id="name"
+                id="username"
                 placeholder=""
-                aria-label="Name"
+                aria-label="Username"
                 className="min-h-14"
                 error={
-                  formik.touched.name && formik.errors.name
-                    ? formik.errors.name
+                  formik.touched.username && formik.errors.username
+                    ? formik.errors.username
                     : null
                 }
-                {...formik.getFieldProps("name")}
+                {...formik.getFieldProps("username")}
               />
 
               {/* <div className="h-[15px] error-wrapper-empty"></div> */}

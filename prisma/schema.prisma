@@ -13,9 +13,12 @@ datasource db {
 model User {
   id        String   @id @default(dbgenerated("concat('usr_', replace(cast(gen_random_uuid() as text), '-', ''))")) @db.Text
   email     String   @unique
-  name      String?
+  username  String?
+  password  String?
   avatar    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+
 
