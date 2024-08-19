@@ -5,12 +5,16 @@ import Image from "next/image";
 import SignupForm from "../../../../components/SignupForm";
 import MaxWidthWrapper from "../../../../components/MaxWidthWrapper";
 
+// const arr = ["one", "two", "three"];
+
+// console.log(arr.includes("one"));
+
 export default function page() {
   return (
     <>
       <section>
-        <MaxWidthWrapper>
-          <div className="mt-20">
+        <MaxWidthWrapper cls="max-w-[640px]">
+          <div className="mt-16">
             <div className="flex w-fit items-baseline">
               <h1 className="text-5xl font-bold w-full">Register</h1>
               <Image

@@ -4,7 +4,8 @@ import "@mantine/core/styles.css";
 // import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import localFont from "next/font/local";
 import NextTopLoader from "nextjs-toploader";
-import PropTypes from "prop-types";
+import AuthProvider from "../../components/AuthProvider";
+// import PropTypes from "prop-types";
 import {
   ColorSchemeScript,
   MantineProvider,
@@ -81,19 +82,21 @@ export default function RootLayout({ children, params }) {
         suppressHydrationWarning
         className={`${opensans.variable} ${playfair.variable} ${recursive.variable}`}
       >
-        <NextTopLoader color="#39ad5d" />
-        {/* {children} */}
-        <MantineProvider theme={theme}>
-          <Navbar />
-          {children}
-          <Footer />
-        </MantineProvider>
+        <AuthProvider>
+          <NextTopLoader color="#39ad5d" />
+          {/* {children} */}
+          <MantineProvider theme={theme}>
+            <Navbar />
+            {children}
+            <Footer />
+          </MantineProvider>
+        </AuthProvider>
       </body>
     </html>
   );
 }
 
-RootLayout.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.object]).isRequired,
-  params: PropTypes.oneOfType([PropTypes.object]).isRequired,
-};
+// RootLayout.propTypes = {
+//   children: PropTypes.oneOfType([PropTypes.object]).isRequired,
+//   params: PropTypes.oneOfType([PropTypes.object]).isRequired,
+// };

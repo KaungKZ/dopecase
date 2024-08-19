@@ -20,21 +20,38 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    const { email, username, password } = await validationSchema.validate(
-      body,
-      { abortEarly: false }
-    );
+    // await validationSchema.validate(body, { abortEarly: false });
+
+    const { email, username, password } = body;
+
+    console.log("trying...2");
 
     const existingUserByEmail = await db.user.findUnique({
       where: { email: email },
     });
 
     if (existingUserByEmail) {
+      console.log("is this");
       return NextResponse.json(
         { user: null, message: "User with this email already exists" },
         { status: 409 }
       );
     }
+
+    // const existingUserByUsername = await db.user.findUnique({
+    //   where: { username: username },
+    // });
+
+    // if (existingUserByUsername) {
+    //   return NextResponse.json(
+    //     {
+    //       user: null,
+    //       message:
+    //         "This username is already taken. Please choose another username",
+    //     },
+    //     { status: 409 }
+    //   );
+    // }
 
     const salt = await bcrypt.genSalt(10);
     const secPass = await bcrypt.hash(password, salt);
@@ -58,7 +75,15 @@ export async function POST(req: Request) {
         status: 201,
       }
     );
-  } catch (errors) {
-    const errMsg = errors.inner.map((error) => error.message);
+  } catch (error) {
+    // const statusCode = error.statusCode || 500;
+    // const message = error.message || "Something went wrong";
+    // // debug(`Error ${statusCode}: ${message}`);
+    // return NextResponse.json(
+    //   {
+    //     error: message,
+    //   },
+    //   { status: statusCode }
+    // );
   }
 }

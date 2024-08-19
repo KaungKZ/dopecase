@@ -4,9 +4,13 @@ import Image from "next/image";
 import { Check, Star } from "lucide-react";
 import MaxWidthWrapper from "../../components/MaxWidthWrapper";
 import { Icons } from "../../components/Icons";
+import { getServerSession } from "next-auth";
+import { authOption } from "../[locale]/api/auth/[...nextauth]/route";
 
 export default async function Home() {
   // const t = await getDictionary(lang);
+  const session = await getServerSession(authOption);
+  console.log("session", session);
   return (
     <main className="w-full ">
       <MaxWidthWrapper>

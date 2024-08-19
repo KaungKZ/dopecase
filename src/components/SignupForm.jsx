@@ -28,7 +28,7 @@ export default function SignupForm() {
   });
 
   async function handleOnSubmit(values) {
-    // console.log(values);
+    console.log(values);
     const res = await fetch("/api/user", {
       method: "POST",
       headers: {
@@ -41,10 +41,8 @@ export default function SignupForm() {
       }),
     });
 
-    console.log(res);
-
     if (res.ok) {
-      router.push("/en");
+      router.push("/en/auth/login");
     } else {
       console.error("Registration failed");
     }
@@ -59,7 +57,7 @@ export default function SignupForm() {
         {(formik) => (
           <form
             onSubmit={formik.handleSubmit}
-            className="mt-12 flex flex-col space-y-6"
+            className="mt-12 flex flex-col space-y-2"
           >
             <ConnectedFocusError />
             <div>
@@ -70,7 +68,7 @@ export default function SignupForm() {
                 id="username"
                 placeholder=""
                 aria-label="Username"
-                className="min-h-14"
+                className="min-h-16"
                 error={
                   formik.touched.username && formik.errors.username
                     ? formik.errors.username
@@ -89,7 +87,7 @@ export default function SignupForm() {
                 id="email"
                 placeholder=""
                 aria-label="Email"
-                className="min-h-14"
+                className="min-h-16"
                 error={
                   formik.touched.email && formik.errors.email
                     ? formik.errors.email
@@ -115,7 +113,7 @@ export default function SignupForm() {
               <PasswordInput
                 id="password"
                 aria-label="Password"
-                className="min-h-14"
+                className="min-h-16"
                 visible={visible}
                 onVisibilityChange={toggle}
                 error={
@@ -149,7 +147,7 @@ export default function SignupForm() {
       </Formik>
       <div className="mb-8">
         <div className="mt-8 mb-6 flex justify-center before:content:['*'] relative before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1/2 before:h-[1px] before:bg-slate-200 after:content:['*'] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:w-1/2 after:h-[1px] after:bg-slate-200">
-          <span className="w-fit bg-background font-medium text-center z-1 px-4">
+          <span className="w-fit bg-background font-medium text-center z-10 px-4">
             Or
           </span>
         </div>

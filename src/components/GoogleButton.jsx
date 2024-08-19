@@ -1,9 +1,13 @@
 import React from "react";
 import ButtonComponent from "./ButtonComponent";
+import { signIn } from "next-auth/react";
 
 export default function GoogleButton() {
   return (
-    <ButtonComponent cls="bg-slate-100 hover:bg-slate-200 transition-colors px-10 min-h-12">
+    <ButtonComponent
+      cls="bg-slate-100 hover:bg-slate-200 transition-colors px-10 min-h-12"
+      onClick={() => signIn("google")}
+    >
       <svg
         enableBackground="new 0 0 24 24"
         className="w-6 h-6"
