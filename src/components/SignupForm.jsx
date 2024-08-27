@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Input, TextInput, PasswordInput, Button } from "@mantine/core";
@@ -13,6 +13,7 @@ import { ConnectedFocusError } from "focus-formik-error";
 
 export default function SignupForm() {
   const [visible, { toggle }] = useDisclosure(false);
+  const [formErr, setFormErr] = useState();
   const router = useRouter();
   const validationSchema = Yup.object({
     username: Yup.string()
@@ -44,6 +45,15 @@ export default function SignupForm() {
     if (res.ok) {
       router.push("/en/auth/login");
     } else {
+      const err = await res.json();
+
+      if (err.message === "User with this email already exists") {
+        setFormErr("User with this email already exists");
+      } else {
+        setFormErr("Registration failed");
+      }
+
+      // console.log(err);
       console.error("Registration failed");
     }
   }

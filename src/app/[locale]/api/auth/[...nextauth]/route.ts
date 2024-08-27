@@ -41,7 +41,7 @@ export const authOption: NextAuthOptions = {
           email: profile.email,
           image: profile.picture,
           isEmailVerified: profile.email_verified ? true : false,
-          username: `${profile.name}`,
+          username: null, // because user sign in with oauth
         };
       },
     }),

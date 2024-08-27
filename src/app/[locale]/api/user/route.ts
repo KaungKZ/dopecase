@@ -31,7 +31,6 @@ export async function POST(req: Request) {
     });
 
     if (existingUserByEmail) {
-      console.log("is this");
       return NextResponse.json(
         { user: null, message: "User with this email already exists" },
         { status: 409 }

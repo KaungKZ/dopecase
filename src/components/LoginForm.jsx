@@ -8,16 +8,17 @@ import { useDisclosure } from "@mantine/hooks";
 import ButtonComponent from "./ButtonComponent";
 import GoogleButton from "./GoogleButton";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { ConnectedFocusError } from "focus-formik-error";
 import { signIn, useSession } from "next-auth/react";
+import { authOption } from "../app/[locale]/api/auth/[...nextauth]/route";
 
 export default function LoginForm() {
   const [visible, { toggle }] = useDisclosure(false);
-  const data = useSession();
+  const data = useSession(authOption);
 
   // console.log(data);
-
+  const pathname = usePathname();
   const router = useRouter();
   const validationSchema = Yup.object({
     username: Yup.string()
@@ -37,12 +38,21 @@ export default function LoginForm() {
       redirect: false,
     });
 
-    console.log(signInData);
+    // console.log(signInData);
 
     if (signInData.error) {
       console.log(signInData.error);
     } else {
-      router.push("/en/");
+      // const { data: session } = useSession()
+
+      console.log(data);
+      if (data) {
+        router.push(`/en?redirectLogin=true`);
+        router.refresh(); // i think
+        // router.push(`/en?redirectLogin=true`);
+      }
+
+      // router.push({ pathname: "/en", query: { redirectLogin: "true" } });
     }
   }
   return (

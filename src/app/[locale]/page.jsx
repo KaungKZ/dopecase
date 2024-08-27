@@ -100,32 +100,39 @@ export default async function Home() {
             </div>
           </div>
           <div className="relative">
-            <div className="w-64 ">
-              <Image
-                src="/phone-template-white-edges.png"
-                width={256}
-                height={500}
-                className="absolute left-0 top-0"
-                alt="phone-template-white-edges"
-              />
-              <Image
-                src="/testimonials/1.jpg"
-                width={256}
-                height={500}
-                className=""
-                alt="testimonials-1"
-              />
+            <div className="w-64 relative">
+              <div className="absolute left-0 top-0 z-10">
+                <div className="w-[256px] h-[500px] relative">
+                  <Image
+                    src="/phone-template-white-edges.png "
+                    fill
+                    sizes="100%"
+                    alt="phone-template-white-edges"
+                  />
+                </div>
+              </div>
+              <div className="w-[256px] h-[500px] relative">
+                <Image
+                  src="/testimonials/1.jpg"
+                  fill
+                  sizes="100%"
+                  alt="testimonials-1"
+                />
+              </div>
+              <div className="absolute -top-28 -right-40">
+                <div className="w-[208px] h-[140px] relative">
+                  <Image
+                    src="/your-image.png"
+                    fill
+                    sizes="100%"
+                    alt="your-image-placeholder"
+                  />
+                </div>
+              </div>
             </div>
             <Image
-              src="/your-image.png"
-              className="absolute -top-28 -right-40"
-              width={208}
-              height={140}
-              alt="your-image-placeholder"
-            />
-            <Image
               src="/line.png"
-              className="absolute -left-7 -bottom-6"
+              className="absolute -left-7 -bottom-6 w-auto h-auto"
               width={80}
               height={140}
               alt="line-placeholder"
@@ -161,7 +168,7 @@ export default async function Home() {
                   <p className="text-lg mt-6 leading-8">
                     "The case feels durable and I even got a compliment on the
                     design. Had the case for two and a half months now and{" "}
-                    <span class="px-1 py-0.5 bg-slate-800 text-white rounded-md">
+                    <span className="px-1 py-0.5 bg-slate-800 text-white rounded-md">
                       the image is super clear
                     </span>
                     , on the case I had before, the image started fading into
@@ -172,6 +179,7 @@ export default async function Home() {
                       <Image
                         src="/users/user-3.png"
                         fill
+                        sizes="100%"
                         alt="user-review-1"
                         className="rounded-full flex-1"
                       />
@@ -202,7 +210,7 @@ export default async function Home() {
                     and that led to some pretty heavy scratchmarks on all of my
                     last phone cases. This one, besides a barely noticeable
                     scratch on the corner,
-                    <span class="px-1 py-0.5 bg-slate-800 text-white rounded-md">
+                    <span className="px-1 py-0.5 bg-slate-800 text-white rounded-md">
                       looks brand new after about half a year
                     </span>
                     . I dig it."
@@ -212,6 +220,7 @@ export default async function Home() {
                       <Image
                         src="/users/user-5.jpg"
                         fill
+                        sizes="100%"
                         alt="user-review-2"
                         className="rounded-full flex-1 object-cover"
                       />
@@ -256,25 +265,37 @@ export default async function Home() {
                 <Image
                   src="/horse.jpg"
                   fill
+                  sizes="100%"
+                  alt="upload-advertise-placeholder-1"
                   className="object-cover rounded-lg shadow-2xl ring-1 ring-gray-900/10"
                 />
               </div>
             </div>
             <div className="w-[126px] h-[30px] relative">
-              <Image src="/arrow.png" fill className="object-cover" />
+              <Image
+                src="/arrow.png"
+                fill
+                className="object-cover"
+                sizes="100%"
+                alt="arrow placeholder"
+              />
             </div>
             <div className="relative">
               <div className="relative w-[240px] h-[490px]">
                 <Image
                   src="/phone-template-white-edges.png"
                   fill
+                  alt="phone-template-white-edge"
+                  sizes="100%"
                   className="object-cover z-10"
                 />
               </div>
               <Image
                 src="/horse_phone.jpg"
+                sizes="100%"
                 // width={240}
                 // height={490}
+                alt="upload-advertise-placeholder-2"
                 fill
                 className="object-cover absolute top-0 left-0"
               />

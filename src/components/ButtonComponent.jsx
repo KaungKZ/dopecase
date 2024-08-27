@@ -11,7 +11,7 @@ import { cn } from "../lib/utils";
 
 export default function ButtonComponent({
   cls = "",
-  link = "/",
+  link = "",
   onClick = () => {},
   children,
   color = "primary",

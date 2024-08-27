@@ -12,8 +12,7 @@ export default async function Navbar() {
   // const data = useSession();
   const data = await getServerSession(authOption);
   const isLoggedIn = data?.user;
-
-  console.log(data?.user.username);
+  const username = data?.user.name || data?.user.username;
 
   // const username = data.data.user.username;
   return (
@@ -36,7 +35,7 @@ export default async function Navbar() {
             {isLoggedIn ? (
               <div className="border-r-2 border-zinc-200 pr-4">
                 <span className="opacity-80 font-recursive text-sm">
-                  {data.user.username ? data.user.username.split(" ")[0] : ""}
+                  {username ? username.split(" ")[0] : ""}
                 </span>
               </div>
             ) : (
