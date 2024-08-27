@@ -16,7 +16,7 @@ export default function LoginForm() {
   const [visible, { toggle }] = useDisclosure(false);
   const data = useSession();
 
-  console.log(data);
+  // console.log(data);
 
   const router = useRouter();
   const validationSchema = Yup.object({

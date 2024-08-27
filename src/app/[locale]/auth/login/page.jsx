@@ -5,13 +5,9 @@ import React from "react";
 // import { AuthError } from "next-auth";
 import LoginForm from "../../../../components/LoginForm";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
 import MaxWidthWrapper from "../../../../components/MaxWidthWrapper";
 
 export default function page() {
-  const data = useSession();
-
-  console.log(data);
   return (
     <section>
       <MaxWidthWrapper cls="max-w-[640px]">

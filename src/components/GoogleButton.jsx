@@ -6,7 +6,11 @@ export default function GoogleButton() {
   return (
     <ButtonComponent
       cls="bg-slate-100 hover:bg-slate-200 transition-colors px-10 min-h-12"
-      onClick={() => signIn("google")}
+      onClick={() =>
+        signIn("google", {
+          callbackUrl: "/en",
+        })
+      }
     >
       <svg
         enableBackground="new 0 0 24 24"

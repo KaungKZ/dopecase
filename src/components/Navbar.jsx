@@ -1,13 +1,23 @@
-"use client";
+// "use client";
 
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import ButtonComponent from "./ButtonComponent";
 import MaxWidthWrapper from "./MaxWidthWrapper";
+import { useSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { authOption } from "../app/[locale]/api/auth/[...nextauth]/route";
 
-export default function Navbar() {
+export default async function Navbar() {
+  // const data = useSession();
+  const data = await getServerSession(authOption);
+  const isLoggedIn = data?.user;
+
+  console.log(data?.user.username);
+
+  // const username = data.data.user.username;
   return (
-    <nav className="sticky left-0 top-0 border-b border-gray-200 bg-white/75 py-4 z-10">
+    <nav className="sticky left-0 top-0 border-b border-gray-200 bg-white/75 py-4 z-50">
       <MaxWidthWrapper>
         <div className="flex items-center justify-between">
           <div>
@@ -22,30 +32,36 @@ export default function Navbar() {
                 `}
             />
           </div>
-          <div className="flex">
-            <div className="border-r-2 border-zinc-200 flex">
-              <ButtonComponent
-                link="/auth/register"
-                transparent
-                cls="text-sm font-medium hover:bg-accent text-foreground/80"
-              >
-                Sign Up
-              </ButtonComponent>
-              <ButtonComponent
-                link="/auth/login"
-                transparent
-                cls="text-sm font-medium hover:bg-accent text-foreground/80"
-              >
-                Log In
-              </ButtonComponent>
-            </div>
+          <div className="flex items-center">
+            {isLoggedIn ? (
+              <div className="border-r-2 border-zinc-200 pr-4">
+                <span className="opacity-80 font-recursive text-sm">
+                  {data.user.username ? data.user.username.split(" ")[0] : ""}
+                </span>
+              </div>
+            ) : (
+              <div className="border-r-2 border-zinc-200 flex">
+                <ButtonComponent
+                  link="/auth/register"
+                  transparent
+                  cls="text-sm font-medium hover:bg-accent text-foreground/80"
+                >
+                  Sign Up
+                </ButtonComponent>
+                <ButtonComponent
+                  link="/auth/login"
+                  transparent
+                  cls="text-sm font-medium hover:bg-accent text-foreground/80"
+                >
+                  Log In
+                </ButtonComponent>
+              </div>
+            )}
+
             <ButtonComponent
               cls="ml-6"
-              onClick={() => {
-                console.log("click works");
-              }}
               color="primary"
-              // link="/auth/register"
+              link="/en/configure/upload"
             >
               Create Case
               <ArrowRight className="text-white h-5 w-5 ml-1.5" />
