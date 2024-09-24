@@ -4,9 +4,10 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import ButtonComponent from "./ButtonComponent";
 import MaxWidthWrapper from "./MaxWidthWrapper";
-import { useSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import { authOption } from "../app/[locale]/api/auth/[...nextauth]/route";
+// import { signIn } from "next-auth/react";
+import UserAccountNav from "./UserAccountNav";
 
 export default async function Navbar() {
   // const data = useSession();
@@ -33,11 +34,7 @@ export default async function Navbar() {
           </div>
           <div className="flex items-center">
             {isLoggedIn ? (
-              <div className="border-r-2 border-zinc-200 pr-4">
-                <span className="opacity-80 font-recursive text-sm">
-                  {username ? username.split(" ")[0] : ""}
-                </span>
-              </div>
+              <UserAccountNav username={username} />
             ) : (
               <div className="border-r-2 border-zinc-200 flex">
                 <ButtonComponent

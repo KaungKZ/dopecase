@@ -67,5 +67,13 @@ model VerificationRequest {
   @@unique([identifier, token])
 }
 
+model ImageConfiguration {
+  id        String @id @default(cuid())
+  width     Int
+  height    Int
+  imageUrl    String
+  croppedImageUrl String?
+}
+
 
 

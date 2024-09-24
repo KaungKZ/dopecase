@@ -20,7 +20,7 @@ export function constructMetadata({
   description = "Create custom high-quality phone cases in seconds",
   image = "/thumbnail.png",
   icons = "/icon.ico",
-}) {
+} = {}) {
   return {
     title,
     description,

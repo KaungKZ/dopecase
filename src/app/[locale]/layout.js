@@ -5,6 +5,7 @@ import "@mantine/core/styles.css";
 import localFont from "next/font/local";
 import NextTopLoader from "nextjs-toploader";
 import AuthProvider from "../../components/AuthProvider";
+import { constructMetadata } from "../../lib/utils";
 // import PropTypes from "prop-types";
 import {
   ColorSchemeScript,
@@ -31,10 +32,7 @@ const recursive = localFont({
   variable: "--font-recursive",
 });
 
-export const metadata = {
-  title: "My Mantine app",
-  description: "I have followed setup instructions carefully",
-};
+export const metadata = constructMetadata();
 
 const theme = createTheme({
   components: {
