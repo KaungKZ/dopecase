@@ -40,14 +40,14 @@ export default async function Navbar() {
                 <ButtonComponent
                   link="/auth/register"
                   transparent
-                  cls="text-sm font-medium hover:bg-accent text-foreground/80"
+                  cls="text-sm font-medium hover:bg-accent text-foreground/90"
                 >
                   Sign Up
                 </ButtonComponent>
                 <ButtonComponent
                   link="/auth/login"
                   transparent
-                  cls="text-sm font-medium hover:bg-accent text-foreground/80"
+                  cls="text-sm font-medium hover:bg-accent text-foreground/90"
                 >
                   Log In
                 </ButtonComponent>

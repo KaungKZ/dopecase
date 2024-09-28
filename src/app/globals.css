@@ -65,7 +65,8 @@
   p,
   span,
   input,
-  textarea {
+  textarea,
+  label {
     @apply font-opensans;
   }
 
@@ -110,6 +111,28 @@ body {
   border-color: var(--input-color);
 }
 
+.mantine-Select-option span,
+.mantine-Select-input {
+  font-family: var(--font-recursive);
+}
+
+.design-radio-group .mantine-RadioCard-card {
+  /* border-color: hsl(var(--primary)); */
+  border-width: 2px;
+}
+
+.design-radio-group .mantine-RadioCard-card[data-checked="true"] {
+  border-color: hsl(var(--primary));
+  border-width: 2px;
+}
+
+.mantine-Select-option[data-checked="true"] {
+  background-color: #39ad5d;
+}
+
+.mantine-Select-option[data-checked="true"] span {
+  color: white;
+}
 .phone-skew {
   transform: perspective(400px) rotateY(3deg) skewX(11.1deg) skewY(-10.9deg);
 }
