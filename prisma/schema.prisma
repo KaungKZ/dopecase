@@ -10,15 +10,53 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum OrderStatus {
+  fulfilled
+  shipped
+  awaiting_shipment
+}
+
+enum PhoneModel {
+  iPhone12
+  iPhone12pro
+  iPhone12promax
+  iPhone13
+  iPhone13pro
+  iPhone13promax
+  iPhone14pro
+  iPhone14
+  iPhone14promax
+  iPhone15
+  iPhone15pro
+  iPhone15promax
+}
+
+enum CaseMaterial {
+  silicone
+  polycarbonate
+}
+
+enum CaseFinish {
+  smooth
+  textured
+}
+
+enum CaseColor {
+  black
+  blue
+  rose
+}
+
+
 model User {
-id                 String  @id @default(cuid())
+  id                 String  @id @default(cuid())
   username          String? @unique
   name          String?
   email         String?   @unique
   emailVerified Boolean? 
   isEmailVerified         Boolean?
   image         String?
- password              String?
+  password              String?
   accounts      Account[]
   sessions      Session[]
   createdAt DateTime @default(now())
@@ -73,6 +111,10 @@ model ImageConfiguration {
   height    Int
   imageUrl    String
   croppedImageUrl String?
+  color           CaseColor?
+  model           PhoneModel?
+  material        CaseMaterial?
+  finish          CaseFinish?
 }
 
 

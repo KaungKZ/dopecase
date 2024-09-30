@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import {
   AspectRatio,
   Radio,
@@ -11,13 +11,14 @@ import {
   ScrollArea,
 } from "@mantine/core";
 import { Rnd } from "react-rnd";
-import Image from "next/image";
+// import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { cn } from "../lib/utils";
 import DndHandler from "./DndHandler";
 import ButtonComponent from "./ButtonComponent";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useUploadThing } from "../lib/uploadthing";
 
 const materials = [
   {
@@ -78,6 +79,8 @@ const colors = [
 
 export default function DesignConfigurator(props) {
   // const [value, setValue] = useState(null);
+  const { imageUrl, width, height, configId } = props;
+
   const [formValues, setFormValues] = useState({
     model: availableDevices[0],
     material: {
@@ -90,6 +93,19 @@ export default function DesignConfigurator(props) {
     },
     color: colors[0].name,
     // totalPrice: 0,
+  });
+  const containerRef = useRef(null);
+  const caseRef = useRef(null);
+
+  const { startUpload } = useUploadThing("imageUploader");
+  const [renderedDimensions, setRenderedDimensions] = useState({
+    width: width / 4,
+    height: height / 4,
+  });
+
+  const [renderedPositions, setRenderedPositions] = useState({
+    x: 150,
+    y: 205,
   });
   const currency = "$";
   const totalPrice = useMemo(() => {
@@ -104,7 +120,6 @@ export default function DesignConfigurator(props) {
   }, [formValues.material, formValues.finish]);
   const selectedColorCode =
     colors.find((c) => c.name === formValues.color).code || "#181818";
-  const { imageUrl, width, height } = props;
 
   console.log(formValues);
 
@@ -120,8 +135,76 @@ export default function DesignConfigurator(props) {
   //   });
   // }, [formValues.material, formValues.finish]);
 
-  function handleOnSubmit(values) {
-    console.log(values);
+  function base64toblob(base64, mime) {
+    const byteChars = atob(base64);
+    const byteNumbers = new Array(byteChars.length);
+
+    for (let i = 0; i < byteChars.length; i++) {
+      byteNumbers[i] = byteChars.charCodeAt(i);
+    }
+
+    const byteArray = new Uint8Array(byteNumbers);
+
+    return new Blob([byteArray], { type: mime });
+  }
+
+  async function handleOnSubmit(values) {
+    // console.log(values);
+
+    try {
+      const {
+        top: caseTop,
+        left: caseLeft,
+        width,
+        height,
+      } = caseRef.current?.getBoundingClientRect();
+
+      const { top: containerTop, left: containerLeft } =
+        containerRef.current?.getBoundingClientRect();
+
+      // get left and top offsets of template phone case (measured from aspect ratio corners)
+      const leftOffset = caseLeft - containerLeft;
+      const topOffset = caseTop - containerTop;
+
+      // substract those offsets from x and y cropped image (measured from aspect ratio corners)
+
+      const actualX = renderedPositions.x - leftOffset;
+      const actualY = renderedPositions.y - topOffset;
+
+      // and get the actual x and y offsets of cropped image (measured from phone case)
+
+      console.log(renderedPositions.x, renderedPositions.y);
+      console.log(actualX, actualY);
+
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+
+      const userImage = new Image();
+      userImage.crossOrigin = "anonymous";
+      userImage.src = imageUrl;
+      await new Promise((resolve) => (userImage.onload = resolve));
+
+      ctx?.drawImage(
+        userImage,
+        actualX,
+        actualY,
+        renderedDimensions.width,
+        renderedDimensions.height
+      );
+
+      const base64 = canvas.toDataURL();
+      const base64data = base64.split(",")[1];
+
+      const blob = base64toblob(base64data, "image/png");
+
+      const file = new File([blob], "croppedImage.png", { type: "image/png" });
+
+      startUpload([file], { configId });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   // console.log(colors.filter((c) => c.name === formValues.color));
@@ -178,20 +261,29 @@ export default function DesignConfigurator(props) {
   return (
     <div className="my-24">
       <div className="grid grid-cols-3">
-        <div className="col-span-2 relative rounded-[32px] w-full bg-[#EAECF0] h-[37.5rem] max-w-4xl border-2 border-dashed border-gray-300 overflow-hidden p-12 flex items-center justify-center">
+        <div
+          ref={containerRef}
+          className="col-span-2 relative rounded-[32px] w-full bg-[#EAECF0] h-[37.5rem] max-w-4xl border-2 border-dashed border-gray-300 overflow-hidden p-12 flex items-center justify-center"
+        >
           <div className="aspect-[896/1831] pointer-events-none w-60 relative">
             <AspectRatio
               ratio={896 / 1831}
               className="aspect-[896/1831] w-full relative z-30 pointer-events-none"
+              ref={caseRef}
             >
-              <Image
+              <img
+                src="/phone-template.png"
+                alt="phone template"
+                className="pointer-events-none select-none w-full h-full"
+              />
+              {/* <Image
                 src="/phone-template.png"
                 alt="phone template"
                 // width={240}
                 // height={120}
                 fill
                 className="pointer-events-none select-none"
-              />
+              /> */}
             </AspectRatio>
             <div className="absolute z-40 inset-0 left-[3px] top-px right-[2px] bottom-px rounded-[32px] shadow-[0_0_0_99999px_rgba(229,231,235,0.6)]" />
             <div
@@ -208,6 +300,24 @@ export default function DesignConfigurator(props) {
               width: width / 4,
               height: height / 4,
             }}
+            onResizeStop={(_, __, ref, ____, { x, y }) => {
+              setRenderedDimensions({
+                width: parseInt(ref.style.width.slice(0, -2)),
+                width: parseInt(ref.style.width.slice(0, -2)),
+              });
+
+              setRenderedPositions({
+                x,
+                y,
+              });
+            }}
+            onDragStop={(_, data) => {
+              const { x, y } = data;
+              setRenderedPositions({
+                x,
+                y,
+              });
+            }}
             lockAspectRatio
             className="border-[1px] border-primary absolute z-20"
             resizeHandleStyles={{
@@ -222,11 +332,16 @@ export default function DesignConfigurator(props) {
             }}
           >
             <div className="relative w-full h-full">
-              <Image
+              {/* <Image
                 src={imageUrl}
                 alt="your image"
                 fill
                 className="pointer-events-none"
+              /> */}
+              <img
+                src={imageUrl}
+                alt="your image"
+                className="pointer-events-none w-full h-full"
               />
             </div>
           </Rnd>
@@ -252,7 +367,7 @@ export default function DesignConfigurator(props) {
                     aria-hidden="true"
                     className="absolute z-10 inset-x-0 bottom-0 h-12 bg-gradient-to-t from-white pointer-events-none"
                   ></div>
-                  <div className="overflow-auto flex flex-col space-y-6 pb-12">
+                  <div className="overflow-auto flex flex-col space-y-6 pb-12 pt-6">
                     <h2 className="text-3xl font-bold">Customize your case</h2>
                     <div className="w-full h-px bg-zinc-200 my-6"></div>
                     <div>
@@ -260,7 +375,7 @@ export default function DesignConfigurator(props) {
                         htmlFor="color"
                         className="input-label !text-sm font-recursive"
                       >
-                        Color:{" "}
+                        Background Case Color:{" "}
                         {formValues.color.charAt(0).toUpperCase() +
                           formValues.color.slice(1)}
                       </label>

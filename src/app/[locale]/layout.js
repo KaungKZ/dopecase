@@ -16,6 +16,7 @@ import {
 import "../globals.css";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import RQProviders from "../../components/RQProviders";
 
 const opensans = localFont({
   src: "../../../public/fonts/OpenSans-VariableFont_wdth,wght.ttf",
@@ -80,15 +81,17 @@ export default function RootLayout({ children, params }) {
         suppressHydrationWarning
         className={`${opensans.variable} ${playfair.variable} ${recursive.variable}`}
       >
-        <AuthProvider>
-          <NextTopLoader color="#39ad5d" />
-          {/* {children} */}
-          <MantineProvider theme={theme}>
-            <Navbar />
-            {children}
-            <Footer />
-          </MantineProvider>
-        </AuthProvider>
+        <RQProviders>
+          <AuthProvider>
+            <NextTopLoader color="#39ad5d" />
+            {/* {children} */}
+            <MantineProvider theme={theme}>
+              <Navbar />
+              {children}
+              <Footer />
+            </MantineProvider>
+          </AuthProvider>
+        </RQProviders>
       </body>
     </html>
   );

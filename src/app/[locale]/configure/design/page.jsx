@@ -34,6 +34,7 @@ export default async function page(props) {
             imageUrl={imageUrl}
             width={width}
             height={height}
+            configId={id}
           />
         </div>
       </MaxWidthWrapper>
