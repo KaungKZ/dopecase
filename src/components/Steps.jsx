@@ -10,7 +10,7 @@ export default function Steps({ currentStep }) {
           "flex-1 py-4 px-6 before:content-[''] before:absolute before:bg-white before:-right-[11px] before:top-1/2 before:-translate-y-1/2 before:w-[20px] before:h-[20px] before:border-gray-200 before:border-r-2 before:border-t-2 before:rotate-45 after:content-[''] after:w-full after:absolute after:h-[5px] after:bottom-0 after:left-0 relative border-gray-200 border-r-2",
           {
             "after:bg-primary": currentStep === 0,
-            "after:bg-zinc-700": currentStep > 0,
+            "after:bg-zinc-700 opacity-60": currentStep > 0,
           }
         )}
       >
@@ -34,11 +34,11 @@ export default function Steps({ currentStep }) {
       </div>
       <div
         className={cn(
-          "flex-1 py-4 px-6 before:content-[''] before:absolute before:bg-white before:-right-[11px] before:top-1/2 before:-translate-y-1/2 before:w-[20px] before:h-[20px] before:border-gray-200 before:border-r-2 before:border-t-2 before:rotate-45 after:content-[''] after:w-full after:absolute after:h-[5px] after:bottom-0 after:left-0  relative border-gray-200 border-r-2",
+          "flex-1 py-4 px-6 before:content-[''] before:absolute before:bg-white after:bg-zinc-400 before:-right-[11px] before:top-1/2 before:-translate-y-1/2 before:w-[20px] before:h-[20px] before:border-gray-200 before:border-r-2 before:border-t-2 before:rotate-45 after:content-[''] after:w-full after:absolute after:h-[5px] after:bottom-0 after:left-0  relative border-gray-200 border-r-2",
 
           {
             "after:bg-primary": currentStep === 1,
-            "after:bg-zinc-700": currentStep > 1,
+            "after:bg-zinc-700 opacity-60": currentStep > 1,
           }
         )}
       >

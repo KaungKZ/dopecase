@@ -1,7 +1,7 @@
 import React from "react";
 import { db } from "../../../../db";
 import MaxWidthWrapper from "../../../../components/MaxWidthWrapper";
-import DesignConfigurator from "./DesignConfigurator";
+import DesignPreview from "./DesignPreview";
 import Steps from "../../../../components/Steps";
 import { notFound } from "next/navigation";
 
@@ -17,14 +17,13 @@ export default async function page(props) {
     where: { id },
   });
 
-  console.log(configuration);
-
   if (!configuration) {
     console.log("no config");
     return notFound();
   }
 
-  const { imageUrl, width, height } = configuration;
+  // const { croppedImageUrl, width, height, color, model, material, finish } =
+  //   configuration;
 
   // console.log(configuration);
 
@@ -33,13 +32,8 @@ export default async function page(props) {
     <section>
       <MaxWidthWrapper>
         <div className="flex flex-col min-h-[calc(100vh-3.5rem-1px)] ">
-          <Steps currentStep={1} />
-          <DesignConfigurator
-            imageUrl={imageUrl}
-            width={width}
-            height={height}
-            configId={id}
-          />
+          <Steps currentStep={2} />
+          <DesignPreview configuration={configuration} />
         </div>
       </MaxWidthWrapper>
     </section>

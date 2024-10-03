@@ -81,7 +81,7 @@ export default function RootLayout({ children, params }) {
         suppressHydrationWarning
         className={`${opensans.variable} ${playfair.variable} ${recursive.variable}`}
       >
-        <RQProviders>
+        <RQProviders children={children}>
           <AuthProvider>
             <NextTopLoader color="#39ad5d" />
             {/* {children} */}

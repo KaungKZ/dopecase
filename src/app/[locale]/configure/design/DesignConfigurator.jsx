@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import {
   AspectRatio,
   Radio,
@@ -11,84 +11,39 @@ import {
   ScrollArea,
 } from "@mantine/core";
 import { Rnd } from "react-rnd";
-// import Image from "next/image";
+import NextImage from "next/image";
 import { ArrowRight } from "lucide-react";
-import { cn } from "../lib/utils";
-import DndHandler from "./DndHandler";
-import ButtonComponent from "./ButtonComponent";
+import { cn } from "../../../../lib/utils.js";
+import DndHandler from "../../../../components/DndHandler.jsx";
+// import useMutation from "@tanstack/react-query";
+import ButtonComponent from "@/components/ButtonComponent.jsx";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { useUploadThing } from "../lib/uploadthing";
-
-const materials = [
-  {
-    name: "Silicone",
-    description: "",
-    price: "0.00",
-  },
-  {
-    name: "Soft Polycarbonate",
-    description: "Scratch-resistant coating",
-    price: "5.00",
-  },
-];
-
-const finishes = [
-  {
-    name: "Smooth Finish",
-    description: "",
-    price: "0.00",
-  },
-  {
-    name: "Textured Finish",
-    description: "Soft grippy texture",
-    price: "2.49",
-  },
-];
-
-const availableDevices = [
-  "iPhone 12",
-  "iPhone 12 pro",
-  "iPhone 12 pro max",
-  "iPhone 13",
-  "iPhone 13 pro",
-  "iPhone 13 pro max",
-  "iPhone 14 pro",
-  "iPhone 14",
-  "iPhone 14 pro max",
-  "iPhone 15",
-  "iPhone 15 pro",
-  "iPhone 15 pro max",
-];
-
-const colors = [
-  {
-    name: "black",
-    code: "#181818",
-  },
-  {
-    name: "blue",
-    code: "#172554",
-  },
-
-  {
-    name: "red",
-    code: "#4C0519",
-  },
-];
+// import { useUploadThing } from "../../../../lib/uploadthing.ts";
+import { useUploadThing } from "@/lib/uploadthing.ts";
+import saveConfig from "./actions.js";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import {
+  materials,
+  finishes,
+  availableDevices,
+  colors,
+  currency,
+} from "../../../../config/products.js";
 
 export default function DesignConfigurator(props) {
   // const [value, setValue] = useState(null);
   const { imageUrl, width, height, configId } = props;
-
+  const router = useRouter();
   const [formValues, setFormValues] = useState({
     model: availableDevices[0],
     material: {
-      name: materials[0].name,
+      name: materials[0].value,
       price: materials[0].price,
     },
     finish: {
-      name: finishes[0].name,
+      name: finishes[0].value,
       price: finishes[0].price,
     },
     color: colors[0].name,
@@ -107,7 +62,6 @@ export default function DesignConfigurator(props) {
     x: 150,
     y: 205,
   });
-  const currency = "$";
   const totalPrice = useMemo(() => {
     const basicFee = 5;
 
@@ -120,20 +74,6 @@ export default function DesignConfigurator(props) {
   }, [formValues.material, formValues.finish]);
   const selectedColorCode =
     colors.find((c) => c.name === formValues.color).code || "#181818";
-
-  console.log(formValues);
-
-  // useEffect(() => {
-  //   const basicFee = 5;
-  //   const calculateTotalPrice =
-  //     basicFee + formValues.material.price + formValues.finish.price;
-  //   setFormValues((prev) => {
-  //     return {
-  //       ...prev,
-  //       totalPrice: calculateTotalPrice,
-  //     };
-  //   });
-  // }, [formValues.material, formValues.finish]);
 
   function base64toblob(base64, mime) {
     const byteChars = atob(base64);
@@ -148,7 +88,7 @@ export default function DesignConfigurator(props) {
     return new Blob([byteArray], { type: mime });
   }
 
-  async function handleOnSubmit(values) {
+  async function saveImageConfiguration() {
     // console.log(values);
 
     try {
@@ -172,9 +112,6 @@ export default function DesignConfigurator(props) {
       const actualY = renderedPositions.y - topOffset;
 
       // and get the actual x and y offsets of cropped image (measured from phone case)
-
-      console.log(renderedPositions.x, renderedPositions.y);
-      console.log(actualX, actualY);
 
       const canvas = document.createElement("canvas");
       canvas.width = width;
@@ -207,6 +144,19 @@ export default function DesignConfigurator(props) {
     }
   }
 
+  const { mutate: saveConfigMutation, isPending } = useMutation({
+    mutationKey: ["save-config"],
+    mutationFn: async (args) => {
+      await Promise.all([saveImageConfiguration(), saveConfig(args)]);
+    },
+    onError: (err) => {
+      console.log(err);
+    },
+    onSuccess: () => {
+      router.push(`/configure/preview?id=${configId}`);
+    },
+  });
+
   // console.log(colors.filter((c) => c.name === formValues.color));
 
   const circles = (arr) => {
@@ -215,7 +165,7 @@ export default function DesignConfigurator(props) {
         className={cn("w-8 h-8 rounded-full", {
           "bg-[#181818]": item.name === "black",
           "bg-[#172554]": item.name === "blue",
-          "bg-[#4C0519]": item.name === "red",
+          "bg-[#4C0519]": item.name === "rose",
         })}
         radius={50}
         value={item.name}
@@ -234,8 +184,8 @@ export default function DesignConfigurator(props) {
       <Radio.Card
         // className={classes.root}
         radius="md"
-        value={item.name}
-        key={item.name}
+        value={item.value}
+        key={item.value}
       >
         <Group wrap="nowrap" align="flex-start">
           {/* <Radio.Indicator /> */}
@@ -271,19 +221,19 @@ export default function DesignConfigurator(props) {
               className="aspect-[896/1831] w-full relative z-30 pointer-events-none"
               ref={caseRef}
             >
-              <img
+              {/* <img
                 src="/phone-template.png"
                 alt="phone template"
                 className="pointer-events-none select-none w-full h-full"
-              />
-              {/* <Image
+              /> */}
+              <NextImage
                 src="/phone-template.png"
                 alt="phone template"
                 // width={240}
                 // height={120}
                 fill
                 className="pointer-events-none select-none"
-              /> */}
+              />
             </AspectRatio>
             <div className="absolute z-40 inset-0 left-[3px] top-px right-[2px] bottom-px rounded-[32px] shadow-[0_0_0_99999px_rgba(229,231,235,0.6)]" />
             <div
@@ -332,17 +282,17 @@ export default function DesignConfigurator(props) {
             }}
           >
             <div className="relative w-full h-full">
-              {/* <Image
+              <NextImage
                 src={imageUrl}
                 alt="your image"
                 fill
                 className="pointer-events-none"
-              /> */}
-              <img
+              />
+              {/* <img
                 src={imageUrl}
                 alt="your image"
                 className="pointer-events-none w-full h-full"
-              />
+              /> */}
             </div>
           </Rnd>
         </div>
@@ -354,8 +304,18 @@ export default function DesignConfigurator(props) {
               finish: formValues.finish,
               colors: formValues.color,
             }}
+            enableReinitialize
             // validationSchema={validationSchema}
-            onSubmit={handleOnSubmit}
+            onSubmit={(values) => {
+              saveConfigMutation({
+                color: values.colors,
+                finish: values.finish.name,
+                material: values.material.name,
+                model: values.model.replace(/\s/gi, ""),
+                configId,
+                totalPrice: parseFloat(totalPrice),
+              });
+            }}
           >
             {(formik) => (
               <form
@@ -442,7 +402,7 @@ export default function DesignConfigurator(props) {
                               ...prev,
                               material: {
                                 name: value,
-                                price: materials.find((m) => m.name === value)
+                                price: materials.find((m) => m.value === value)
                                   .price, // not the best practice
                               },
                             };
@@ -470,7 +430,7 @@ export default function DesignConfigurator(props) {
                               ...prev,
                               finish: {
                                 name: value,
-                                price: finishes.find((m) => m.name === value)
+                                price: finishes.find((m) => m.value === value)
                                   .price, // not the best practice
                               },
                             };
@@ -496,6 +456,8 @@ export default function DesignConfigurator(props) {
                     <ButtonComponent
                       type="submit"
                       cls="min-w-[200px] min-h-11 text-sm"
+                      isLoading={isPending}
+                      isDisabled={isPending}
                     >
                       Continue
                       <ArrowRight className="text-white h-5 w-5 ml-1.5" />

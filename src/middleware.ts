@@ -27,6 +27,7 @@ export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith("/_next")) return NextResponse.next();
 
   // Check if there is any supported locale in the pathname
+
   const { pathname } = request.nextUrl;
 
   const pathnameHasLocale = locales.some(

@@ -3,6 +3,9 @@ const nextConfig = {
   images: {
     domains: ["utfs.io"],
   },
+  experimental: {
+    optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
+  },
 };
 
 export default nextConfig;

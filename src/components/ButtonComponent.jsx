@@ -18,23 +18,38 @@ export default function ButtonComponent({
   transparent = false,
   nested = false,
   type = "button",
+  isLoading,
+  isDisabled,
 }) {
   return (
     <Button
       component={link ? Link : Button}
       href={link}
       color={color}
+      disabled={isDisabled}
       type={type}
       className={cn(
         "transition-colors",
         cls,
-        transparent
-          ? "bg-transparent hover:bg-transparent hover:text-foreground/100"
-          : ""
+        {
+          "bg-transparent hover:bg-transparent hover:text-foreground/100":
+            transparent,
+        },
+        {
+          "": isDisabled,
+        }
       )}
       onClick={onClick}
     >
-      {nested ? (
+      {isLoading ? (
+        <>
+          <span className="ml-1.5 flex items-center gap-1">
+            <span className="animate-flashing w-1 h-1 bg-white rounded-full inline-block" />
+            <span className="animate-flashing delay-100 w-1 h-1 bg-white rounded-full inline-block" />
+            <span className="animate-flashing delay-200 w-1 h-1 bg-white rounded-full inline-block" />
+          </span>
+        </>
+      ) : nested ? (
         <div dangerouslySetInnerHTML={{ __html: nested }} />
       ) : (
         <>{children}</>

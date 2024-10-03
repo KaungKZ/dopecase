@@ -17,8 +17,6 @@ export default function UserAccountNav({ username }) {
 
   detectClickOutside(ref, dropOpen, setDropOpen);
 
-  console.log(dropOpen);
-
   // useEffect(() => {
   //   document.addEventListener("mousedown", () => {
   //     console.log("clicked");

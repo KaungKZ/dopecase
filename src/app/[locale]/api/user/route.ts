@@ -24,8 +24,6 @@ export async function POST(req: Request) {
 
     const { email, username, password } = body;
 
-    console.log("trying...2");
-
     const existingUserByEmail = await db.user.findUnique({
       where: { email: email },
     });
