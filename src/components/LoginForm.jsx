@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Input, TextInput, PasswordInput, Button } from "@mantine/core";
@@ -16,7 +16,7 @@ import { authOption } from "../app/[locale]/api/auth/[...nextauth]/route";
 export default function LoginForm() {
   const [visible, { toggle }] = useDisclosure(false);
   const data = useSession(authOption);
-
+  const [isLoading, setIsLoading] = useState(false);
   // console.log(data);
   const pathname = usePathname();
   const router = useRouter();
@@ -31,7 +31,7 @@ export default function LoginForm() {
 
   async function handleOnSubmit(values) {
     // console.log(values);
-
+    setIsLoading(true);
     const signInData = await signIn("credentials", {
       username: values.username,
       password: values.password,
@@ -39,15 +39,21 @@ export default function LoginForm() {
     });
 
     // console.log(signInData);
-
+    setIsLoading(false);
     if (signInData.error) {
       console.log(signInData.error);
     } else {
       // const { data: session } = useSession()
 
-      console.log(data);
       if (data) {
-        router.push(`/en?redirectLogin=true`);
+        const redirectURL = localStorage.getItem("redirectURL");
+
+        if (redirectURL && !redirectURL.includes("/auth/register")) {
+          router.push(redirectURL);
+        } else {
+          router.push(`/en?redirectLogin=true`);
+        }
+        localStorage.removeItem("redirectURL");
         router.refresh(); // i think
         // router.push(`/en?redirectLogin=true`);
       }
@@ -130,7 +136,11 @@ export default function LoginForm() {
             {formik.touched.email && formik.errors.email ? (
               <div>{formik.errors.email}</div>
             ) : null} */}
-            <ButtonComponent type="submit" cls="w-full min-h-11 text-base">
+            <ButtonComponent
+              type="submit"
+              cls="w-full min-h-11 text-base"
+              isLoading={isLoading}
+            >
               Log In
             </ButtonComponent>
           </form>

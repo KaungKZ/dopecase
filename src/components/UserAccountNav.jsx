@@ -56,7 +56,7 @@ export default function UserAccountNav({ username }) {
             //  link="/auth/register"
             transparent
             onClick={() => {
-              signOut({ callbackUrl: "/", redirect: true });
+              signOut();
             }}
             cls="text-xsm  px-0 font-recursive-button font-medium text-zinc-500 hover:bg-accent text-foreground/80"
           >

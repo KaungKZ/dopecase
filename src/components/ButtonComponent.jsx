@@ -32,6 +32,9 @@ export default function ButtonComponent({
         "transition-colors",
         cls,
         {
+          "pointer-events-none": isLoading,
+        },
+        {
           "bg-transparent hover:bg-transparent hover:text-foreground/100":
             transparent,
         },

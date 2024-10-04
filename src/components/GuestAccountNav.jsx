@@ -22,6 +22,13 @@ export default function GuestAccountNav({ domain }) {
     <div className="border-r-2 border-zinc-200 flex">
       <ButtonComponent
         //   link="/auth/register"
+        onClick={() => {
+          localStorage.setItem(
+            "redirectURL",
+            window.location.href.split(domain)[1]
+          );
+          router.push("/auth/register");
+        }}
         transparent
         cls="text-sm font-medium hover:bg-accent text-foreground/90"
       >
@@ -32,8 +39,6 @@ export default function GuestAccountNav({ domain }) {
         transparent
         cls="text-sm font-medium hover:bg-accent text-foreground/90"
         onClick={() => {
-          console.log(domain, window.location.href);
-
           localStorage.setItem(
             "redirectURL",
             window.location.href.split(domain)[1]

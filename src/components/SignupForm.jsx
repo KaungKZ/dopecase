@@ -13,6 +13,7 @@ import { ConnectedFocusError } from "focus-formik-error";
 
 export default function SignupForm() {
   const [visible, { toggle }] = useDisclosure(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formErr, setFormErr] = useState();
   const router = useRouter();
   const validationSchema = Yup.object({
@@ -29,7 +30,8 @@ export default function SignupForm() {
   });
 
   async function handleOnSubmit(values) {
-    console.log(values);
+    setIsLoading(true);
+    // console.log(values);
     const res = await fetch("/api/user", {
       method: "POST",
       headers: {
@@ -41,16 +43,23 @@ export default function SignupForm() {
         email: values.email,
       }),
     });
+    setIsLoading(false);
 
     if (res.ok) {
       router.push("/en/auth/login");
     } else {
       const err = await res.json();
-
+      console.log(err);
       if (err.message === "User with this email already exists") {
         setFormErr("User with this email already exists");
+        setTimeout(() => {
+          setFormErr("");
+        }, 8000);
       } else {
         setFormErr("Registration failed");
+        setTimeout(() => {
+          setFormErr("");
+        }, 8000);
       }
 
       // console.log(err);
@@ -149,14 +158,21 @@ export default function SignupForm() {
             {formik.touched.email && formik.errors.email ? (
               <div>{formik.errors.email}</div>
             ) : null} */}
-            <ButtonComponent type="submit" cls="w-full min-h-11 text-base">
+            <ButtonComponent
+              type="submit"
+              cls="w-full min-h-11 text-base"
+              isLoading={isLoading}
+            >
               Create your account
             </ButtonComponent>
+            <span className="h-5 text-red-600 text-center text-sm font-opensans">
+              {formErr ? formErr : ""}
+            </span>
           </form>
         )}
       </Formik>
-      <div className="mb-8">
-        <div className="mt-8 mb-6 flex justify-center before:content:['*'] relative before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1/2 before:h-[1px] before:bg-slate-200 after:content:['*'] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:w-1/2 after:h-[1px] after:bg-slate-200">
+      <div className="mb-8 mt-3">
+        <div className="mb-6 flex justify-center before:content:['*'] relative before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1/2 before:h-[1px] before:bg-slate-200 after:content:['*'] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:w-1/2 after:h-[1px] after:bg-slate-200">
           <span className="w-fit bg-background font-medium text-center z-10 px-4">
             Or
           </span>

@@ -467,7 +467,7 @@ export default function DesignConfigurator(props) {
                       type="submit"
                       cls="min-w-[200px] min-h-11 text-sm"
                       isLoading={isPending}
-                      isDisabled={isPending}
+                      // isDisabled={isPending}
                     >
                       Continue
                       <ArrowRight className="text-white h-5 w-5 ml-1.5" />

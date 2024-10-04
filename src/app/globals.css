@@ -101,6 +101,19 @@ body {
   }
 }
 
+.mantine-Modal-root .mantine-Modal-content {
+  border-radius: 12px;
+}
+
+.login-modal .mantine-Modal-content {
+  min-width: 550px;
+  overflow-y: unset;
+}
+
+.login-modal .mantine-ScrollArea-viewport {
+  height: 600px;
+}
+
 .mantine-Input-input {
   min-height: 40px;
 }
