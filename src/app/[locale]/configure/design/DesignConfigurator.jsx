@@ -123,6 +123,14 @@ export default function DesignConfigurator(props) {
       userImage.src = imageUrl;
       await new Promise((resolve) => (userImage.onload = resolve));
 
+      console.log(
+        userImage,
+        actualX,
+        actualY,
+        renderedDimensions.width,
+        renderedDimensions.height
+      );
+
       ctx?.drawImage(
         userImage,
         actualX,
@@ -133,6 +141,8 @@ export default function DesignConfigurator(props) {
 
       const base64 = canvas.toDataURL();
       const base64data = base64.split(",")[1];
+
+      console.log(base64);
 
       const blob = base64toblob(base64data, "image/png");
 
@@ -253,7 +263,7 @@ export default function DesignConfigurator(props) {
             onResizeStop={(_, __, ref, ____, { x, y }) => {
               setRenderedDimensions({
                 width: parseInt(ref.style.width.slice(0, -2)),
-                width: parseInt(ref.style.width.slice(0, -2)),
+                height: parseInt(ref.style.height.slice(0, -2)),
               });
 
               setRenderedPositions({

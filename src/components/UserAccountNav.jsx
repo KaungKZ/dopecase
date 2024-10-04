@@ -15,7 +15,7 @@ export default function UserAccountNav({ username }) {
   // const { ref, isComponentVisible } = useComponentVisible(true);
   const ref = useRef();
 
-  detectClickOutside(ref, dropOpen, setDropOpen);
+  // detectClickOutside(ref, dropOpen, setDropOpen);
 
   // useEffect(() => {
   //   document.addEventListener("mousedown", () => {

@@ -8,6 +8,9 @@ export default withUt({
   ],
   theme: {
     extend: {
+      zIndex: {
+        "100": "100",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
