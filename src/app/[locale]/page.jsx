@@ -6,6 +6,7 @@ import MaxWidthWrapper from "../../components/MaxWidthWrapper";
 import { Icons } from "../../components/Icons";
 import { getServerSession } from "next-auth";
 import { authOption } from "../../lib/config/authOption";
+import YourImage from "../../../public/your-image.png";
 import { Reviews } from "../../components/Review";
 import ButtonComponent from "../../components/ButtonComponent";
 import Footer from "../../components/Footer";
@@ -122,7 +123,7 @@ export default async function Home() {
               <div className="absolute -top-28 -right-40">
                 <div className="w-[208px] h-[140px] relative">
                   <Image
-                    src="/your-image.png"
+                    src={YourImage}
                     fill
                     sizes="100%"
                     alt="your-image-placeholder"
