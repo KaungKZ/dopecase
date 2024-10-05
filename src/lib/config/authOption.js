@@ -10,7 +10,7 @@ const bcrypt = require("bcryptjs");
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
-export const authOption: NextAuthOptions = {
+export const authOption = {
   adapter: PrismaAdapter(db),
   session: {
     strategy: "jwt",
@@ -81,7 +81,7 @@ export const authOption: NextAuthOptions = {
   ],
 
   callbacks: {
-    async signIn({ user, account, profile }: any) {
+    async signIn({ user, account, profile }) {
       if (account.provider === "google") {
         // console.log("google", account, user, profile);
         // connectToDb();
