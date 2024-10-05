@@ -8,7 +8,6 @@
     "check": "npm run format",
     "lint": "next lint",
     "format": "prettier -w . !.next/**",
-    "eslint": "eslint --ext .jsx,.js src/components src/app",
     "start": "next start"
   },
   "dependencies": {
