@@ -1,4 +1,4 @@
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, AuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -10,7 +10,7 @@ const bcrypt = require("bcryptjs");
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
-export const authOption = {
+export const authOption: NextAuthOptions = {
   adapter: PrismaAdapter(db),
   session: {
     strategy: "jwt",
@@ -21,8 +21,8 @@ export const authOption = {
   },
   providers: [
     GoogleProvider({
-      clientId: GOOGLE_CLIENT_ID,
-      clientSecret: GOOGLE_CLIENT_SECRET,
+      clientId: GOOGLE_CLIENT_ID || "",
+      clientSecret: GOOGLE_CLIENT_SECRET || "",
       profile: (profile) => {
         return {
           id: profile.sub,
@@ -45,7 +45,7 @@ export const authOption = {
         username: { label: "Username", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials: any) {
         // Add logic here to look up the user from the credentials supplied
         // const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
 
@@ -81,7 +81,7 @@ export const authOption = {
   ],
 
   callbacks: {
-    async signIn({ user, account, profile }) {
+    async signIn({ user, account, profile }: any) {
       if (account.provider === "google") {
         // console.log("google", account, user, profile);
         // connectToDb();

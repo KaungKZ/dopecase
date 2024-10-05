@@ -26,7 +26,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/lib/config/authOption.js"
+    "src/lib/config/authOption.ts"
   ],
   "exclude": ["node_modules"]
 }
