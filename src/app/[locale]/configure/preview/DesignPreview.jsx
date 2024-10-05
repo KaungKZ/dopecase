@@ -26,7 +26,7 @@ import {
 import { ConnectedFocusError } from "focus-formik-error";
 import { signIn, useSession } from "next-auth/react";
 
-import { authOption } from "../../api/auth/[...nextauth]/route";
+import { authOption } from "@/lib/config/authOption";
 import CreateModalPopup from "../../../../components/CreateModalPopup.jsx";
 import { useDisclosure } from "@mantine/hooks";
 import { useMutation } from "@tanstack/react-query";

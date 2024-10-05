@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { ConnectedFocusError } from "focus-formik-error";
 import { signIn, useSession } from "next-auth/react";
-import { authOption } from "../app/[locale]/api/auth/[...nextauth]/route";
+import { authOption } from "../lib/config/authOption";
 
 export default function LoginForm() {
   const [visible, { toggle }] = useDisclosure(false);

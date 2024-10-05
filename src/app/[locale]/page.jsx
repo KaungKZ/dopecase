@@ -5,7 +5,7 @@ import { Check, Star, ArrowRight } from "lucide-react";
 import MaxWidthWrapper from "../../components/MaxWidthWrapper";
 import { Icons } from "../../components/Icons";
 import { getServerSession } from "next-auth";
-import { authOption } from "../[locale]/api/auth/[...nextauth]/route";
+import { authOption } from "../../lib/config/authOption";
 import { Reviews } from "../../components/Review";
 import ButtonComponent from "../../components/ButtonComponent";
 import Footer from "../../components/Footer";

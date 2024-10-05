@@ -2,7 +2,7 @@
 
 import { db } from "@/db";
 import { getServerSession } from "next-auth";
-import { authOption } from "../../api/auth/[...nextauth]/route";
+import { authOption } from "@/lib/config/authOption";
 
 export default async function handleCheckout({ configId }) {
   const data = await getServerSession(authOption);

@@ -6,7 +6,7 @@ import ButtonComponent from "./ButtonComponent";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { headers } from "next/headers";
 import { getServerSession } from "next-auth";
-import { authOption } from "../app/[locale]/api/auth/[...nextauth]/route";
+import { authOption } from "@/lib/config/authOption";
 // import { signIn } from "next-auth/react";
 import UserAccountNav from "./UserAccountNav";
 import GuestAccountNav from "./GuestAccountNav";
