@@ -7,13 +7,22 @@ import { authOption } from "../../api/auth/[...nextauth]/route";
 export default async function handleCheckout({ configId }) {
   const data = await getServerSession(authOption);
 
-  console.log(data);
   const configuration = await db.imageConfiguration.findUnique({
     where: {
       id: configId,
     },
   });
+  console.log(configuration);
 
-  if (!configuration) {
+  if (!data) {
+    throw new Error("You need to log in");
   }
+
+  // await db.order.create({
+  //   data: {
+  //     configurationId: configuration.id,
+  //     userId: data.id,
+  //     totalPrice: configuration.totalPrice
+  //   },
+  // });
 }

@@ -139,6 +139,7 @@ export const authOption: NextAuthOptions = {
           ...session.user,
           isEmailVerified: token.isEmailVerified,
           username: token.username,
+          id: token.sub,
         },
       };
     },

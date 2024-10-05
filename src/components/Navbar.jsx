@@ -20,8 +20,6 @@ export default async function Navbar() {
   const domain = headersList.get("host") || "";
   // const fullUrl = headersList.get("referer") || "";
 
-  console.log(domain);
-
   // const username = data.data.user.username;
   return (
     <nav className="sticky left-0 top-0 border-b border-gray-200 bg-white/75 py-4 z-100">
