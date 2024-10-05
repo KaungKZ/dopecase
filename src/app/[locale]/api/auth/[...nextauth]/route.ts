@@ -21,7 +21,7 @@ const bcrypt = require("bcryptjs");
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
-export const authOption: NextAuthOptions = {
+const authOption: NextAuthOptions = {
   adapter: PrismaAdapter(db),
   session: {
     strategy: "jwt",
@@ -147,4 +147,4 @@ export const authOption: NextAuthOptions = {
 };
 
 const handler = NextAuth(authOption);
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST, authOption };
