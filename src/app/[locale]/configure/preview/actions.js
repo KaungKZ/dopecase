@@ -15,7 +15,7 @@ export default async function handleCheckout({ configId }) {
   console.log(configuration);
 
   if (!data) {
-    throw new Error("You need to log in");
+    throw new Error("You need to log inn");
   }
 
   // await db.order.create({
