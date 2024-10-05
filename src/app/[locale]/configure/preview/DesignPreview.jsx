@@ -6,7 +6,7 @@ import {
   colors,
   prices,
   currency,
-} from "../../../../config/products.js";
+} from "../../../../lib/config/products.js";
 import Link from "next/link";
 import Image from "next/image";
 import { Check, ArrowRight } from "lucide-react";

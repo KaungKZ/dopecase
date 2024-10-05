@@ -30,7 +30,7 @@ import {
   availableDevices,
   colors,
   currency,
-} from "../../../../config/products.js";
+} from "../../../../lib/config/products.js";
 
 export default function DesignConfigurator(props) {
   // const [value, setValue] = useState(null);
