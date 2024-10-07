@@ -18,7 +18,6 @@ export default async function page(props) {
   });
 
   if (!configuration) {
-    console.log("no config");
     return notFound();
   }
 

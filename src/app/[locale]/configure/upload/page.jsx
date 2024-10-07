@@ -14,6 +14,7 @@ export default function page() {
   const [isDragOver, setIsDragOver] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isPending, startTransition] = useTransition();
+  const [uploadErr, setUploadErr] = useState("");
   // const isPending = true;
   const router = useRouter();
 
@@ -30,8 +31,14 @@ export default function page() {
           router.push(`/configure/design?id=${configId}`);
         });
       },
-      onUploadError: () => {
-        alert("error occurred while uploading");
+      onUploadError: (err) => {
+        // console.log(typeof err);
+        if (err.message.toLowerCase().includes("filesizemismatch")) {
+          setUploadErr("File size must not exceed 4MB");
+        } else {
+          setUploadErr(err.message);
+        }
+        // alert("error occurred while uploading");
       },
       onUploadBegin: () => {
         // alert("upload has begun");
@@ -61,10 +68,16 @@ export default function page() {
       <MaxWidthWrapper>
         <div className="flex flex-col min-h-[calc(100vh-3.5rem-1px)] ">
           <Steps currentStep={0} />
-
+          <div className="h-6 flex justify-center mt-16">
+            {uploadErr ? (
+              <span className="text-base text-red-600 font-medium">
+                {uploadErr}
+              </span>
+            ) : null}
+          </div>
           <div
             className={cn(
-              "relative my-16 w-full h-full flex flex-col flex-1 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10",
+              "relative mb-16 mt-2 w-full h-full flex flex-col flex-1 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10",
               {
                 "ring-blue-900/25 bg-blue-900/10": isDragOver,
               }

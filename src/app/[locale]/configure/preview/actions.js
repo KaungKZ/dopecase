@@ -16,7 +16,7 @@ export default async function handleCheckout({ configId }) {
   // console.log(configuration, data);
 
   if (!data) {
-    throw new Error("You need to log inn");
+    throw new Error("You need to be logged in");
   }
 
   let order = undefined;
@@ -40,10 +40,11 @@ export default async function handleCheckout({ configId }) {
     });
   }
 
-  console.log(
-    Math.round(configuration.totalPrice.toFixed(2) * 100),
-    `${process.env.NEXT_PUBLIC_SERVER_URL}thank-you?orderID=${order.id}`
-  );
+  // console.log(
+  //   "okokok",
+  //   Math.round(configuration.totalPrice.toFixed(2) * 100),
+  //   `${process.env.NEXT_PUBLIC_SERVER_URL}thank-you?orderID=${order.id}`
+  // );
 
   const product = await stripeconfig.products.create({
     name: "Custom iPhone Case",

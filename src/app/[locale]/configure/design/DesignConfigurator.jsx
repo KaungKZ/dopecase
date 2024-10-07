@@ -142,13 +142,11 @@ export default function DesignConfigurator(props) {
       const base64 = canvas.toDataURL();
       const base64data = base64.split(",")[1];
 
-      console.log(base64);
-
       const blob = base64toblob(base64data, "image/png");
 
       const file = new File([blob], "croppedImage.png", { type: "image/png" });
 
-      startUpload([file], { configId });
+      await startUpload([file], { configId });
     } catch (err) {
       console.log(err);
     }

@@ -17,10 +17,7 @@ export default async function page(props) {
     where: { id },
   });
 
-  console.log(configuration);
-
   if (!configuration) {
-    console.log("no config");
     return notFound();
   }
 

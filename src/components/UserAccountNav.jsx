@@ -58,7 +58,7 @@ export default function UserAccountNav({ username }) {
             onClick={() => {
               signOut();
             }}
-            cls="text-xsm  px-0 font-recursive-button font-medium text-zinc-500 hover:bg-accent text-foreground/80"
+            cls="text-xs px-0 font-recursive-button font-medium text-zinc-500 hover:bg-accent text-foreground/80"
           >
             Sign Out
           </ButtonComponent>

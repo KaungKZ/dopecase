@@ -45,8 +45,10 @@ export default function DesignPreview(props) {
     finish,
     totalPrice,
   } = props.configuration;
+
   const [visible, { toggle }] = useDisclosure(false);
   const data = useSession(authOption);
+  const [modalLoginLoading, setModalLoginLoading] = useState(false);
 
   // console.log("rendered");
 
@@ -78,7 +80,7 @@ export default function DesignPreview(props) {
 
   async function handleLogin(values) {
     // console.log(values);
-
+    setModalLoginLoading(true);
     const signInData = await signIn("credentials", {
       username: values.username,
       password: values.password,
@@ -86,13 +88,13 @@ export default function DesignPreview(props) {
     });
 
     // console.log(signInData);
+    setModalLoginLoading(false);
 
     if (signInData.error) {
       console.log(signInData.error);
     } else {
       // const { data: session } = useSession()
 
-      console.log(data);
       if (data) {
         // router.push(`/en?redirectLogin=true`);
         close();
@@ -105,11 +107,9 @@ export default function DesignPreview(props) {
   }
 
   function handleClickCheckout() {
-    console.log(data);
     if (data.data) {
       handleConfigMutation({ configId: id });
     } else {
-      console.log("show singin modal");
       open();
       // show sign in modal
     }
@@ -160,12 +160,14 @@ export default function DesignPreview(props) {
                 )}
               /> */}
               <div className="absolute -z-10 inset-0">
-                <Image
-                  className="object-cover pointer-events-none min-w-full min-h-full"
-                  src={croppedImageUrl}
-                  fill
-                  alt="overlaying phone image"
-                />
+                {croppedImageUrl && (
+                  <Image
+                    className="object-cover pointer-events-none min-w-full min-h-full"
+                    src={croppedImageUrl}
+                    fill
+                    alt="overlaying phone image"
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -262,7 +264,7 @@ export default function DesignPreview(props) {
                   cls="px-10"
                   color="primary"
                   isLoading={isPending}
-                  isDisabled={!data.data}
+                  isDisabled={data.status === "loading"}
                   // isLoading={test}
                   onClick={() => handleClickCheckout()}
                   // onClick={() => setTest((prev) => !prev)}
@@ -350,6 +352,7 @@ export default function DesignPreview(props) {
                     <ButtonComponent
                       type="submit"
                       cls="w-full min-h-11 text-base"
+                      isLoading={modalLoginLoading}
                     >
                       Log In
                     </ButtonComponent>
