@@ -9,11 +9,15 @@ import { authOption } from "../../lib/config/authOption";
 import YourImage from "../../../public/your-image.png";
 import { Reviews } from "../../components/Review";
 import ButtonComponent from "../../components/ButtonComponent";
-import Footer from "../../components/Footer";
+// import { getLocale } from "next-intl/server";
 
-export default async function Home() {
+export default async function Home({ params }) {
   // const t = await getDictionary(lang);
-  const session = await getServerSession(authOption);
+
+  // console.log(params);
+
+  // console.log(getLocale());
+  // const session = await getServerSession(authOption);
   // console.log("session", session);
   return (
     <main className="w-full ">

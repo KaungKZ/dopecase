@@ -47,7 +47,7 @@ export default function DesignPreview(props) {
   } = props.configuration;
   const [visible, { toggle }] = useDisclosure(false);
   const data = useSession(authOption);
-  const { update } = useSession(authOption);
+  // const { update } = useSession(authOption);
   const router = useRouter();
   const [opened, { open, close }] = useDisclosure(false);
   const validationSchema = Yup.object({
@@ -67,9 +67,10 @@ export default function DesignPreview(props) {
     onError: (err) => {
       console.log(err);
     },
-    // onSuccess: () => {
-    //   router.push(`/en`);
-    // },
+    onSuccess: ({ url }) => {
+      if (url) router.push(url);
+      else throw new Error("Unable to retrieve payment URL.");
+    },
   });
 
   async function handleLogin(values) {
@@ -114,10 +115,8 @@ export default function DesignPreview(props) {
   return (
     <>
       <div className="my-24">
-        <div>
-          <h2>You are only 1 step away !</h2>
-        </div>
-        <div className="mt-20 flex flex-col items-center md:grid text-sm sm:grid-cols-12 sm:grid-rows-1 sm:gap-x-6 md:gap-x-8 lg:gap-x-12">
+        <div></div>
+        <div className="flex flex-col items-center md:grid text-sm sm:grid-cols-12 sm:grid-rows-1 sm:gap-x-6 md:gap-x-8 lg:gap-x-12">
           <div className="md:col-span-4 lg:col-span-3 md:row-span-2 md:row-end-2">
             {/* <div className="relative max-w-[245px] h-[500px] overflow-hidden">
               <Image
@@ -168,7 +167,10 @@ export default function DesignPreview(props) {
             </div>
           </div>
           <div className=" sm:col-span-9 md:row-end-1">
-            <h2 className="font-recursive text-3xl font-bold">
+            <h2 className="text-primary font-bold text-lg">
+              You are only 1 step away !
+            </h2>
+            <h2 className="font-recursive text-3xl font-bold mt-4">
               Your {matchingModelsValue[model]} Case
             </h2>
             <div className="flex space-x-2 items-center mt-3">
