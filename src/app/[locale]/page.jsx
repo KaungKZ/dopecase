@@ -33,8 +33,9 @@ export default async function Home({ params }) {
             </h1>
             <p className="text-lg mt-8 pr-10 max-w-prose text-center  text-wrap">
               Capture your favorite memories with your own,{" "}
-              <b className="text-primary">one-of-one</b> phone case. CaseCobra
-              allows you to hold your memories, along with your phone.
+              <span className="text-primary font-semibold ">one-of-one</span>{" "}
+              phone case. CaseCobra allows you to hold your memories, along with
+              your phone.
             </p>
             <div className="font-medium mt-8 flex flex-col space-y-2">
               <div className="flex gap-1.5 items-center">
@@ -137,7 +138,7 @@ export default async function Home({ params }) {
             </div>
             <Image
               src="/line.png"
-              className="absolute -left-7 -bottom-6 w-auto h-auto"
+              className="absolute -left-6 -bottom-6"
               width={80}
               height={140}
               alt="line-placeholder"
