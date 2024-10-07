@@ -7,6 +7,7 @@ import MaxWidthWrapper from "./MaxWidthWrapper";
 import { headers } from "next/headers";
 import { getServerSession } from "next-auth";
 import { authOption } from "@/lib/config/authOption";
+// import LoadingAnimator from "./LoadingAnimator";
 // import { signIn } from "next-auth/react";
 import UserAccountNav from "./UserAccountNav";
 import GuestAccountNav from "./GuestAccountNav";

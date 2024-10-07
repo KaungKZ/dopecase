@@ -74,8 +74,6 @@ export default async function handleCheckout({ configId }) {
     ],
   });
 
-  console.log("done");
-
   return { url: stripeSession.url };
 
   // await db.order.create({

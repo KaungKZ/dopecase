@@ -47,6 +47,9 @@ export default function DesignPreview(props) {
   } = props.configuration;
   const [visible, { toggle }] = useDisclosure(false);
   const data = useSession(authOption);
+
+  // console.log("rendered");
+
   // const { update } = useSession(authOption);
   const router = useRouter();
   const [opened, { open, close }] = useDisclosure(false);
@@ -258,8 +261,11 @@ export default function DesignPreview(props) {
                 <ButtonComponent
                   cls="px-10"
                   color="primary"
-                  // link="/en/configure/upload"
+                  isLoading={isPending}
+                  isDisabled={!data.data}
+                  // isLoading={test}
                   onClick={() => handleClickCheckout()}
+                  // onClick={() => setTest((prev) => !prev)}
                 >
                   Check Out
                   <ArrowRight className="text-white h-5 w-5 ml-1.5" />
