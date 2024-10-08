@@ -24,6 +24,8 @@ export function middleware(request: NextRequest) {
   if (PUBLIC_FILE.test(request.nextUrl.pathname)) {
     return;
   }
+  if (request.nextUrl.pathname.startsWith("/api")) return NextResponse.next();
+
   if (request.nextUrl.pathname.startsWith("/_next")) return NextResponse.next();
 
   // Check if there is any supported locale in the pathname
@@ -50,6 +52,7 @@ export const config = {
   matcher: [
     // Skip all internal paths (_next)
     "/((?!_next).*)",
+
     // Optional: only run on root (/) URL
     // '/'
   ],
