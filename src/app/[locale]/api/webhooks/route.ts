@@ -9,6 +9,8 @@ export async function POST(req: Request) {
 
     const signature = headers().get("stripe-signature");
 
+    console.log(signature);
+
     if (!signature) {
       throw new Response("Invalid Signature", { status: 400 });
     }
@@ -18,6 +20,8 @@ export async function POST(req: Request) {
       signature,
       process.env.STRIPE_WEBHOOK_SECRET!
     );
+
+    console.log(event);
 
     if (event.type === "checkout.session.completed") {
       if (!event.data.object.customer_details?.email) {
