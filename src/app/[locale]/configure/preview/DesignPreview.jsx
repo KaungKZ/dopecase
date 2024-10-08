@@ -46,6 +46,10 @@ export default function DesignPreview(props) {
     totalPrice,
   } = props.configuration;
 
+  const { locale } = props;
+
+  // console.log(props);
+
   const [visible, { toggle }] = useDisclosure(false);
   const data = useSession(authOption);
   const [modalLoginLoading, setModalLoginLoading] = useState(false);
@@ -108,7 +112,7 @@ export default function DesignPreview(props) {
 
   function handleClickCheckout() {
     if (data.data) {
-      handleConfigMutation({ configId: id });
+      handleConfigMutation({ configId: id, locale: locale });
     } else {
       open();
       // show sign in modal

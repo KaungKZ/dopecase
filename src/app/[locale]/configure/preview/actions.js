@@ -5,7 +5,11 @@ import { getServerSession } from "next-auth";
 import { authOption } from "@/lib/config/authOption";
 import { stripeconfig } from "../../../../lib/stripeconfig";
 
-export default async function handleCheckout({ configId }) {
+export default async function handleCheckout(params) {
+  // console.log(params)
+
+  const { configId, locale } = params;
+
   const data = await getServerSession(authOption);
 
   const configuration = await db.imageConfiguration.findUnique({
@@ -56,8 +60,8 @@ export default async function handleCheckout({ configId }) {
   });
 
   const stripeSession = await stripeconfig.checkout.sessions.create({
-    success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}thank-you?orderID=${order.id}`,
-    cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}configure/preview?id=${configuration.id}`,
+    success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}${locale}/thank-you?orderID=${order.id}`,
+    cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}${locale}/configure/preview?id=${configuration.id}`,
     payment_method_types: ["card"],
     mode: "payment",
     shipping_address_collection: {
