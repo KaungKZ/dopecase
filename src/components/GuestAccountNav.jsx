@@ -3,12 +3,12 @@
 import React, { useEffect, useState } from "react";
 import ButtonComponent from "./ButtonComponent";
 import { useRouter } from "next/navigation";
+import { getLocale } from "next-intl/server";
 
-export default function GuestAccountNav({ domain }) {
+export default function GuestAccountNav({ domain, locale }) {
   //   const [url, setURL] = useState("");
   //   const pathname = usePathname();
-
-  const router = useRouter();
+  // const router = useRouter();
   //   console.log(url);
   //   console.log(router, pathname);
 
@@ -18,15 +18,27 @@ export default function GuestAccountNav({ domain }) {
   //     }
   //   }, []);
 
+  // console.log(
+  //   window.location.href,
+  //   process.env.NEXT_PUBLIC_SERVER_URL + locale
+  // );
+
   return (
     <div className="border-r-2 border-zinc-200 flex">
       <ButtonComponent
         link="/auth/register"
         onClick={() => {
-          localStorage.setItem(
-            "redirectURL",
-            window.location.href.split(process.env.NEXT_PUBLIC_SERVER_URL)[1]
-          );
+          if (
+            window.location.href !==
+            process.env.NEXT_PUBLIC_SERVER_URL + locale
+          ) {
+            localStorage.setItem(
+              "redirectURL",
+              window.location.href.split(
+                process.env.NEXT_PUBLIC_SERVER_URL + locale
+              )[1]
+            );
+          }
           // router.push("/auth/register");
         }}
         transparent
@@ -39,10 +51,17 @@ export default function GuestAccountNav({ domain }) {
         transparent
         cls="text-sm font-medium hover:bg-accent text-foreground/90"
         onClick={() => {
-          localStorage.setItem(
-            "redirectURL",
-            window.location.href.split(process.env.NEXT_PUBLIC_SERVER_URL)[1]
-          );
+          if (
+            window.location.href !==
+            process.env.NEXT_PUBLIC_SERVER_URL + locale
+          ) {
+            localStorage.setItem(
+              "redirectURL",
+              window.location.href.split(
+                process.env.NEXT_PUBLIC_SERVER_URL + locale
+              )[1]
+            );
+          }
           // router.push("/auth/login");
         }}
       >

@@ -29,6 +29,8 @@ export default function LoginForm() {
     // .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
   });
 
+  // console.log(data);
+
   async function handleOnSubmit(values) {
     // console.log(values);
     setIsLoading(true);
@@ -43,21 +45,19 @@ export default function LoginForm() {
     if (signInData.error) {
       console.log(signInData.error);
     } else {
-      // const { data: session } = useSession()
-
-      if (data) {
-        const redirectURL = localStorage.getItem("redirectURL");
-
-        if (redirectURL && !redirectURL.includes("/auth/register")) {
-          router.push(redirectURL);
-        } else {
-          router.push(`/en?redirectLogin=true`);
-        }
-        localStorage.removeItem("redirectURL");
-        router.refresh(); // i think
-        // router.push(`/en?redirectLogin=true`);
+      // const { data } = useSession(authOption);
+      // if (data) {
+      const redirectURL = localStorage.getItem("redirectURL");
+      if (redirectURL && !redirectURL.includes("/auth/register")) {
+        router.push(redirectURL);
+      } else {
+        router.push(`/`);
       }
-
+      if (redirectURL) localStorage.removeItem("redirectURL");
+      // router.push("/"); // i think
+      router.refresh();
+      // router.push(`/en?redirectLogin=true`);
+      // }
       // router.push({ pathname: "/en", query: { redirectLogin: "true" } });
     }
   }

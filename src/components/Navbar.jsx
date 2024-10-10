@@ -11,12 +11,17 @@ import { authOption } from "@/lib/config/authOption";
 // import { signIn } from "next-auth/react";
 import UserAccountNav from "./UserAccountNav";
 import GuestAccountNav from "./GuestAccountNav";
+import { getLocale } from "next-intl/server";
 
 export default async function Navbar(params) {
   // const data = useSession();
+  const locale = await getLocale();
+
   const data = await getServerSession(authOption);
+
   const isLoggedIn = data?.user;
   const username = data?.user.name || data?.user.username;
+  const isAdmin = data?.user.email === process.env.ADMIN_EMAIL;
   const headersList = headers();
   const domain = headersList.get("host") || "";
   // const fullUrl = headersList.get("referer") || "";
@@ -40,9 +45,9 @@ export default async function Navbar(params) {
           </div>
           <div className="flex items-center">
             {isLoggedIn ? (
-              <UserAccountNav username={username} />
+              <UserAccountNav username={username} isAdmin={isAdmin} />
             ) : (
-              <GuestAccountNav domain={domain} />
+              <GuestAccountNav domain={domain} locale={locale} />
             )}
 
             <ButtonComponent

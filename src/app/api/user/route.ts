@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "../../../../db";
+import { db } from "@/db";
 const bcrypt = require("bcryptjs");
 // import * as Yup from "yup";
 
@@ -50,6 +50,8 @@ export async function POST(req: Request) {
     //   );
     // }
 
+    const role = email === process.env.ADMIN_EMAIL ? "admin" : "user";
+
     const salt = await bcrypt.genSalt(10);
     const secPass = await bcrypt.hash(password, salt);
 
@@ -58,6 +60,7 @@ export async function POST(req: Request) {
         username,
         email,
         password: secPass,
+        role,
       },
     });
 

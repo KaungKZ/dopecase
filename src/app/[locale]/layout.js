@@ -3,6 +3,8 @@ import React from "react";
 import "@mantine/core/styles.css";
 // import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import localFont from "next/font/local";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 import NextTopLoader from "nextjs-toploader";
 import AuthProvider from "../../components/AuthProvider";
 import { constructMetadata } from "../../lib/utils";
@@ -71,9 +73,10 @@ const theme = createTheme({
   },
 });
 
-export default function RootLayout({ children, params }) {
+export default async function RootLayout({ children, params }) {
+  const messages = await getMessages();
   return (
-    <html lang={params.lang}>
+    <html lang={params.locale}>
       <head>
         <ColorSchemeScript />
       </head>
@@ -81,17 +84,19 @@ export default function RootLayout({ children, params }) {
         suppressHydrationWarning
         className={`${opensans.variable} ${playfair.variable} ${recursive.variable}`}
       >
-        <RQProviders children={children}>
-          <AuthProvider>
-            <NextTopLoader color="#39ad5d" />
-            {/* {children} */}
-            <MantineProvider theme={theme}>
-              <Navbar />
-              {children}
-              <Footer />
-            </MantineProvider>
-          </AuthProvider>
-        </RQProviders>
+        <NextIntlClientProvider messages={messages}>
+          <RQProviders children={children}>
+            <AuthProvider>
+              <NextTopLoader color="#39ad5d" />
+              {/* {children} */}
+              <MantineProvider theme={theme}>
+                <Navbar />
+                {children}
+                <Footer />
+              </MantineProvider>
+            </AuthProvider>
+          </RQProviders>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

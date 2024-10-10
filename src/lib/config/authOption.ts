@@ -27,6 +27,7 @@ export const authOption: NextAuthOptions = {
         return {
           id: profile.sub,
           name: `${profile.name}`,
+          role: profile.email === process.env.ADMIN_EMAIL ? "admin" : "user",
           email: profile.email,
           image: profile.picture,
           isEmailVerified: profile.email_verified ? true : false,
@@ -81,6 +82,7 @@ export const authOption: NextAuthOptions = {
   ],
 
   callbacks: {
+    // async redirect({url, baseUrl}) {},
     async signIn({ user, account, profile }: any) {
       if (account.provider === "google") {
         // console.log("google", account, user, profile);
@@ -128,6 +130,7 @@ export const authOption: NextAuthOptions = {
           ...session.user,
           isEmailVerified: token.isEmailVerified,
           username: token.username,
+          role: token.role,
           id: token.sub,
         },
       };

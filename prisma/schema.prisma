@@ -54,6 +54,7 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified Boolean? 
+  role          String?
   isEmailVerified         Boolean?
   image         String?
   password              String?

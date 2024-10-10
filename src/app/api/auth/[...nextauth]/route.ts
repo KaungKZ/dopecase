@@ -1,8 +1,8 @@
 // // src/app/api/auth/[...nextauth]/route.ts
 
 // // export { GET, POST } from "../../../../../../auth";
-import { session } from "../../../../../lib/session";
-import { prisma } from "../../../../../lib/prisma";
+import { session } from "../../../../lib/session";
+import { prisma } from "../../../../lib/prisma";
 
 // import { handlers } from "../../../../../../auth";
 
@@ -15,8 +15,8 @@ import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { db } from "../../../../../db";
-import { authOption } from "../../../../../lib/config/authOption";
+import { db } from "../../../../db";
+import { authOption } from "../../../../lib/config/authOption";
 const bcrypt = require("bcryptjs");
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
