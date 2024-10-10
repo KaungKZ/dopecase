@@ -21,13 +21,13 @@ export default function GuestAccountNav({ domain }) {
   return (
     <div className="border-r-2 border-zinc-200 flex">
       <ButtonComponent
-        //   link="/auth/register"
+        link="/auth/register"
         onClick={() => {
           localStorage.setItem(
             "redirectURL",
-            window.location.href.split(domain)[1]
+            window.location.href.split(process.env.NEXT_PUBLIC_SERVER_URL)[1]
           );
-          router.push("/auth/register");
+          // router.push("/auth/register");
         }}
         transparent
         cls="text-sm font-medium hover:bg-accent text-foreground/90"
@@ -35,15 +35,15 @@ export default function GuestAccountNav({ domain }) {
         Sign Up
       </ButtonComponent>
       <ButtonComponent
-        //   link="/auth/login"
+        link="/auth/login"
         transparent
         cls="text-sm font-medium hover:bg-accent text-foreground/90"
         onClick={() => {
           localStorage.setItem(
             "redirectURL",
-            window.location.href.split(domain)[1]
+            window.location.href.split(process.env.NEXT_PUBLIC_SERVER_URL)[1]
           );
-          router.push("/auth/login");
+          // router.push("/auth/login");
         }}
       >
         Log In

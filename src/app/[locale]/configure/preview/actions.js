@@ -44,12 +44,6 @@ export default async function handleCheckout(params) {
     });
   }
 
-  // console.log(
-  //   "okokok",
-  //   Math.round(configuration.totalPrice.toFixed(2) * 100),
-  //   `${process.env.NEXT_PUBLIC_SERVER_URL}thank-you?orderID=${order.id}`
-  // );
-
   const product = await stripeconfig.products.create({
     name: "Custom iPhone Case",
     images: [configuration.imageUrl],

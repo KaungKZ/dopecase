@@ -12,7 +12,7 @@ import { authOption } from "@/lib/config/authOption";
 import UserAccountNav from "./UserAccountNav";
 import GuestAccountNav from "./GuestAccountNav";
 
-export default async function Navbar() {
+export default async function Navbar(params) {
   // const data = useSession();
   const data = await getServerSession(authOption);
   const isLoggedIn = data?.user;
