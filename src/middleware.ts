@@ -9,6 +9,9 @@ const publicPages = [
   "/auth/login",
   "/auth/register",
   "/configure/upload",
+  "/configure/design",
+  "/configure/preview",
+  "/thank-you",
   "/unauthorized-route",
 ];
 const PUBLIC_FILE = /\.(.*)$/;
@@ -73,7 +76,12 @@ export default async function middleware(req: NextRequest) {
       return NextResponse.redirect(unauthorizedURL);
     }
 
-    if (req.nextUrl.pathname.startsWith("/auth")) {
+    // console.log(
+    //   req.nextUrl.pathname,
+    //   req.nextUrl.pathname.startsWith(`${locale}/auth`)
+    // );
+
+    if (req.nextUrl.pathname.startsWith(`/${locale}/auth`)) {
       return NextResponse.redirect(`${process.env.NEXTAUTH_URL}`);
     }
   }

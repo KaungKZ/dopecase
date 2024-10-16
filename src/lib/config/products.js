@@ -74,6 +74,12 @@ export const matchingModelsValue = {
   iPhone15promax: "iPhone 15 pro max",
 };
 
+export const productStatusConvert = {
+  awaiting_shipment: "Awaiting Shipment",
+  fulfilled: "Fulfilled",
+  shipped: "Shipped",
+};
+
 export const prices = {
   base_price: 5,
   smooth: 0,
