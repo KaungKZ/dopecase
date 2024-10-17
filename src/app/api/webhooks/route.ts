@@ -2,14 +2,16 @@ import { db } from "@/db";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
+import { Resend } from "resend";
+import OrderReceivedEmail from "../../../components/email/OrderReceivedEmail";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
     const body = await req.text();
 
     const signature = headers().get("stripe-signature");
-
-    console.log(signature);
 
     if (!signature) {
       throw new Response("Invalid Signature", { status: 400 });
@@ -20,8 +22,6 @@ export async function POST(req: Request) {
       signature,
       process.env.STRIPE_WEBHOOK_SECRET!
     );
-
-    console.log(event);
 
     if (event.type === "checkout.session.completed") {
       if (!event.data.object.customer_details?.email) {
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
     const billingAddress = session.customer_details?.address;
     const shippingAddress = session.shipping_details?.address;
 
-    await db.order.update({
+    const updatedOrder = await db.order.update({
       where: {
         id: orderId,
       },
@@ -70,6 +70,26 @@ export async function POST(req: Request) {
           },
         },
       },
+    });
+
+    await resend.emails.send({
+      from: "Dopecase <kaungkzdev@gmail.com>",
+      to: [session.customer_details!.email!],
+      subject: "Thank you for your order !",
+      react: OrderReceivedEmail({
+        orderId,
+        orderDate: updatedOrder.createdAt.toLocaleDateString(),
+        shippingAddress: {
+          name: session.customer_details!.name!,
+          city: shippingAddress!.city,
+
+          country: shippingAddress!.country,
+          postalCode: shippingAddress!.postal_code,
+
+          street: shippingAddress!.line1,
+          state: shippingAddress!.state,
+        },
+      }),
     });
 
     return NextResponse.json({ result: event, ok: true });

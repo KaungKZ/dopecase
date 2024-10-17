@@ -12,7 +12,7 @@ import {
   Progress,
   Select,
 } from "@mantine/core";
-import { formatPrice } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
 import changeOrderStatus from "../app/[locale]/dashboard/action";
 import { productStatusConvert, currency } from "../lib/config/products";
@@ -20,6 +20,7 @@ import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { useRouter } from "next/navigation";
@@ -101,7 +102,11 @@ export default function DesignDashboard({ orders, lastWeekSum, lastMonthSum }) {
               <span className="block font-recursive font-semibold text-zinc-700">
                 {info.row.original.user.name}
               </span>
-              <span className="block font-recursive text-sm text-gray-500">
+              <span
+                className={cn("block font-recursive text-sm text-gray-500", {
+                  "text-zinc-700 font-semibold": !info.row.original.user.name,
+                })}
+              >
                 {info.row.original.user.email}
               </span>
             </>
@@ -186,6 +191,13 @@ export default function DesignDashboard({ orders, lastWeekSum, lastMonthSum }) {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+
+    initialState: {
+      pagination: {
+        pageSize: 10,
+      },
+    },
   });
 
   // console.log(orders);
@@ -282,11 +294,11 @@ export default function DesignDashboard({ orders, lastWeekSum, lastMonthSum }) {
                 <tr
                   key={row.id}
                   className={`
-                ${i % 2 === 0 ? "bg-gray-50" : "bg-gray-100"}
+                ${i % 2 === 0 ? "" : "bg-gray-100"}
                 `}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="px-3.5 py-2">
+                    <td key={cell.id} className="px-3.5 py-4">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -303,7 +315,7 @@ export default function DesignDashboard({ orders, lastWeekSum, lastMonthSum }) {
           </tbody>
         </table>
         {/* pagination */}
-        <div className="flex items-center justify-end mt-2 gap-2">
+        <div className="flex items-center justify-end mt-8 gap-2">
           <button
             onClick={() => {
               table.previousPage();
