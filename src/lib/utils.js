@@ -37,6 +37,6 @@ export function constructMetadata({
       creator: "@kaungkz",
     },
     icons,
-    metadataBase: new URL("https://casecobra.vercel.app/"),
+    metadataBase: new URL("https://dopecase.vercel.app/"),
   };
 }

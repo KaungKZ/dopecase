@@ -83,7 +83,7 @@ const OrderReceivedEmail = ({ shippingAddress, orderId, orderDate }) => {
             </Row>
             <Row>
               <Text style={footer.text}>
-                © CaseCobra, Inc. All Rights Reserved.
+                © Dopecase, Inc. All Rights Reserved.
               </Text>
             </Row>
           </Section>

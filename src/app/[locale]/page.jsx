@@ -45,7 +45,7 @@ export default async function Home({ params }) {
             <p className="text-lg mt-8 pr-10 max-w-prose text-center text-wrap xlmx:text-left lgmx:text-center lgmx:max-w-full">
               Capture your favorite memories with your own,{" "}
               <span className="text-primary font-semibold ">one-of-one</span>{" "}
-              phone case. CaseCobra allows you to hold your memories, along with
+              phone case. Dopecase allows you to hold your memories, along with
               your phone.
             </p>
             <div className="font-medium mt-8 flex flex-col space-y-2 lgmx:items-center">

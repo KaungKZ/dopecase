@@ -38,7 +38,7 @@ export default async function Navbar(params) {
               cls="hover:bg-accent"
               nested={`
                 <span class="text-lg text-foreground font-semibold">
-                  case<span class="text-green-600 ">cobra</span>
+                  dope<span class="text-green-600 ">case</span>
                 </span>
                 `}
             />
