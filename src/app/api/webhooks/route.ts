@@ -73,12 +73,13 @@ export async function POST(req: Request) {
     });
 
     await resend.emails.send({
-      from: "Dopecase <kaungkzdev@gmail.com>",
+      from: "Dopecase <onboarding@resend.dev>",
       to: [session.customer_details!.email!],
       subject: "Thank you for your order !",
       react: OrderReceivedEmail({
         orderId,
         orderDate: updatedOrder.createdAt.toLocaleDateString(),
+        // @ts-ignore
         shippingAddress: {
           name: session.customer_details!.name!,
           city: shippingAddress!.city,
