@@ -43,7 +43,7 @@ export async function POST(req: Request) {
     const billingAddress = session.customer_details?.address;
     const shippingAddress = session.shipping_details?.address;
 
-    const updatedOrder = await db.order.update({
+    await db.order.update({
       where: {
         id: orderId,
       },
@@ -72,26 +72,28 @@ export async function POST(req: Request) {
       },
     });
 
-    await resend.emails.send({
-      from: "Dopecase <onboarding@resend.dev>",
-      to: [session.customer_details!.email!],
-      subject: "Thank you for your order !",
-      react: OrderReceivedEmail({
-        orderId,
-        orderDate: updatedOrder.createdAt.toLocaleDateString(),
-        // @ts-ignore
-        shippingAddress: {
-          name: session.customer_details!.name!,
-          city: shippingAddress!.city,
+    // need to buy domain and set in in resend dashboard
 
-          country: shippingAddress!.country,
-          postalCode: shippingAddress!.postal_code,
+    // await resend.emails.send({
+    //   from: "Dopecase <onboarding@resend.dev>",
+    //   to: [session.customer_details!.email!],
+    //   subject: "Thank you for your order !",
+    //   react: OrderReceivedEmail({
+    //     orderId,
+    //     orderDate: updatedOrder.createdAt.toLocaleDateString(),
+    //     // @ts-ignore
+    //     shippingAddress: {
+    //       name: session.customer_details!.name!,
+    //       city: shippingAddress!.city,
 
-          street: shippingAddress!.line1,
-          state: shippingAddress!.state,
-        },
-      }),
-    });
+    //       country: shippingAddress!.country,
+    //       postalCode: shippingAddress!.postal_code,
+
+    //       street: shippingAddress!.line1,
+    //       state: shippingAddress!.state,
+    //     },
+    //   }),
+    // });
 
     return NextResponse.json({ result: event, ok: true });
   } catch (err) {

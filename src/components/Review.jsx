@@ -109,7 +109,7 @@ function ReviewGrid() {
   return (
     <div
       ref={containerRef}
-      className="relative -mx-4 mt-16 grid h-[49rem] max-h-[150vh] grid-cols-1 items-start gap-8 overflow-hidden px-4 sm:mt-20 md:grid-cols-2 lg:grid-cols-3"
+      className="relative -mx-4 mt-16 grid h-[49rem] max-h-[150vh] grid-cols-2 items-start gap-8 overflow-hidden px-4 smmx:grid-cols-1 sm:mt-20 md:grid-cols-2 lg:grid-cols-3 mdmx:h-[40rem] smmx:max-w-[320px] lgmx:mt-10  lgmx:mx-auto"
     >
       {isInView ? (
         <>
@@ -125,7 +125,7 @@ function ReviewGrid() {
           />
           <ReviewColumn
             reviews={[...column2, ...column3[1]]}
-            className="hidden md:block"
+            className="hidden sm:block"
             reviewClassName={(reviewIndex) =>
               reviewIndex >= column2.length ? "lg:hidden" : ""
             }
@@ -146,7 +146,7 @@ function ReviewGrid() {
 
 export function Reviews() {
   return (
-    <MaxWidthWrapper cls="relative max-w-5xl">
+    <MaxWidthWrapper cls="relative max-w-5xl ">
       <img
         aria-hidden="true"
         src="/what-people-are-buying.png"

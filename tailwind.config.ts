@@ -96,6 +96,8 @@ export default withUt({
         sm: { min: "600px" },
         // => @media (max-width: 639px) { ... }
         xsm: { min: "480px" },
+        "3xlmx": { max: "1520px" },
+        "2xlmx": { max: "1360px" },
         xlmx: { max: "1280px" },
         // => @media (max-width: 1279px) { ... }
         lgmx: { max: "1024px" },

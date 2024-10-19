@@ -43,21 +43,22 @@ export default async function Navbar(params) {
                 `}
             />
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center ">
             {isLoggedIn ? (
               <UserAccountNav username={username} isAdmin={isAdmin} />
             ) : (
               <GuestAccountNav domain={domain} locale={locale} />
             )}
-
-            <ButtonComponent
-              cls="ml-6"
-              color="primary"
-              link="/en/configure/upload"
-            >
-              Create Case
-              <ArrowRight className="text-white h-5 w-5 ml-1.5" />
-            </ButtonComponent>
+            <div className="mdmx:hidden">
+              <ButtonComponent
+                cls="ml-6"
+                color="primary"
+                link="/en/configure/upload"
+              >
+                Create Case
+                <ArrowRight className="text-white h-5 w-5 ml-1.5" />
+              </ButtonComponent>
+            </div>
           </div>
         </div>
       </MaxWidthWrapper>

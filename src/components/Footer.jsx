@@ -4,9 +4,9 @@ import ButtonComponent from "./ButtonComponent";
 
 export default function Footer() {
   return (
-    <div className="border-t border-gray-200 bg-white py-7">
+    <div className="border-t border-gray-200 bg-white py-7 smmx:py-4">
       <MaxWidthWrapper>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center smmx:flex-col-reverse smmx:space-y-reverse smmx:space-y-3">
           <span className="text-muted-foreground text-sm">
             &#169; 2024 All rights reserved
           </span>
