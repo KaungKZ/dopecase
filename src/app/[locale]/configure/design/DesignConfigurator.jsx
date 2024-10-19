@@ -88,6 +88,13 @@ export default function DesignConfigurator(props) {
     return new Blob([byteArray], { type: mime });
   }
 
+  // function insideScrollareaContent () {
+  //   return (
+  //     <>
+  //     </>
+  //   )
+  // }
+
   async function saveImageConfiguration() {
     // console.log(values);
 
@@ -218,10 +225,10 @@ export default function DesignConfigurator(props) {
 
   return (
     <div className="my-24">
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-3 lgmx:flex lgmx:flex-col">
         <div
           ref={containerRef}
-          className="col-span-2 relative rounded-[32px] w-full bg-[#EAECF0] h-[37.5rem] max-w-4xl border-2 border-dashed border-gray-300 overflow-hidden p-12 flex items-center justify-center"
+          className="col-span-2 relative rounded-[32px] w-full bg-[#EAECF0] h-[37.5rem] max-w-4xl border-2 border-dashed border-gray-300 overflow-hidden p-12 flex items-center justify-center lgmx:max-w-full lgmx:h-auto"
         >
           <div className="aspect-[896/1831] pointer-events-none w-60 relative">
             <AspectRatio
@@ -328,7 +335,7 @@ export default function DesignConfigurator(props) {
             {(formik) => (
               <form
                 onSubmit={formik.handleSubmit}
-                className="h-[37.5rem] flex flex-col"
+                className="h-[37.5rem] flex flex-col lgmx:h-auto"
               >
                 <ScrollArea className="px-8 relative flex-1 h-full">
                   <div
@@ -456,14 +463,14 @@ export default function DesignConfigurator(props) {
                   <div className="">
                     <div className="w-full h-px bg-zinc-200 mb-4"></div>
                   </div>
-                  <div className="flex justify-between space-x-6 items-center">
+                  <div className="flex justify-between space-x-10 items-center">
                     <span className="font-semibold font-recursive">
                       {currency}
                       {totalPrice}
                     </span>
                     <ButtonComponent
                       type="submit"
-                      cls="min-w-[200px] min-h-11 text-sm"
+                      cls="min-w-full min-h-11 text-sm w-full"
                       isLoading={isPending}
                       // isDisabled={isPending}
                     >

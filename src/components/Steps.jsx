@@ -4,18 +4,18 @@ import Image from "next/image";
 
 export default function Steps({ currentStep }) {
   return (
-    <div className="w-full bg-white border-gray-200 border-l border-r flex">
+    <div className="w-full bg-white border-gray-200 border-l border-r flex lgmx:flex-col">
       <div
         className={cn(
-          "flex-1 py-4 px-6 before:content-[''] before:absolute before:bg-white before:-right-[11px] before:top-1/2 before:-translate-y-1/2 before:w-[20px] before:h-[20px] before:border-gray-200 before:border-r-2 before:border-t-2 before:rotate-45 after:content-[''] after:w-full after:absolute after:h-[5px] after:bottom-0 after:left-0 relative border-gray-200 border-r-2",
+          "flex-1 py-4 px-6 before:content-[''] before:absolute before:bg-white before:-right-[11px] before:top-1/2 before:-translate-y-1/2 before:w-[20px] before:h-[20px] before:border-gray-200 before:border-r-2 before:border-t-2 before:rotate-45 after:content-[''] after:w-full after:absolute after:h-[5px] after:bottom-0 after:left-0 relative border-gray-200 border-r-2 lgmx:after:left-0 lgmx:after:w-[5px] lgmx:after:h-full lgmx:border-b-2 lgmx:border-r-0 lgmx:before:left-1/2 lgmx:before:top-full lgmx:before:rotate-[135deg] lgmx:py-3",
           {
             "after:bg-primary": currentStep === 0,
             "after:bg-zinc-700 opacity-60": currentStep > 0,
           }
         )}
       >
-        <div className="flex items-center justify-center">
-          <div className="w-[70px] h-[75px] relative mr-4">
+        <div className="flex items-center justify-center lgmx:justify-start">
+          <div className="w-[70px] h-[75px] relative mr-4 lgmx:w-[60px] lgmx:h-[65px]">
             <Image src="/snake-1.png" fill sizes="100%" alt="step-1" />
           </div>
           <div className="flex flex-col">
@@ -34,7 +34,7 @@ export default function Steps({ currentStep }) {
       </div>
       <div
         className={cn(
-          "flex-1 py-4 px-6 before:content-[''] before:absolute before:bg-white after:bg-zinc-400 before:-right-[11px] before:top-1/2 before:-translate-y-1/2 before:w-[20px] before:h-[20px] before:border-gray-200 before:border-r-2 before:border-t-2 before:rotate-45 after:content-[''] after:w-full after:absolute after:h-[5px] after:bottom-0 after:left-0  relative border-gray-200 border-r-2",
+          "flex-1 py-4 px-6 before:content-[''] before:absolute before:bg-white after:bg-zinc-400 before:-right-[11px] before:top-1/2 before:-translate-y-1/2 before:w-[20px] before:h-[20px] before:border-gray-200 before:border-r-2 before:border-t-2 before:rotate-45 after:content-[''] after:w-full after:absolute after:h-[5px] after:bottom-0 after:left-0  relative border-gray-200 border-r-2 lgmx:after:left-0 lgmx:after:w-[5px] lgmx:after:h-full lgmx:border-b-2 lgmx:border-r-0 lgmx:before:left-1/2 lgmx:before:top-full lgmx:before:rotate-[135deg] lgmx:py-3",
 
           {
             "after:bg-primary": currentStep === 1,
@@ -42,8 +42,8 @@ export default function Steps({ currentStep }) {
           }
         )}
       >
-        <div className="flex items-center justify-center">
-          <div className="w-[70px] h-[75px] relative mr-4">
+        <div className="flex items-center justify-center lgmx:justify-start">
+          <div className="w-[70px] h-[75px] relative mr-4 lgmx:w-[60px] lgmx:h-[65px]">
             <Image src="/snake-2.png" fill sizes="100%" alt="step-1" />
           </div>
           <div className="flex flex-col">
@@ -60,15 +60,15 @@ export default function Steps({ currentStep }) {
       </div>
       <div
         className={cn(
-          "flex-1 py-4 px-6 after:content-[''] after:w-full after:absolute after:h-[5px] after:bottom-0 after:left-0 after:bg-zinc-400 relative border-gray-200 border-r",
+          "flex-1 py-4 px-6 after:content-[''] after:w-full after:absolute after:h-[5px] after:bottom-0 after:left-0 after:bg-zinc-400 relative border-gray-200 border-r lgmx:after:left-0 lgmx:after:w-[5px] lgmx:after:h-full lgmx:border-b-2 lgmx:border-r-0 lgmx:py-3",
 
           {
             "after:bg-primary": currentStep === 2,
           }
         )}
       >
-        <div className="flex items-center justify-center">
-          <div className="w-[70px] h-[75px] relative mr-4">
+        <div className="flex items-center justify-center lgmx:justify-start">
+          <div className="w-[70px] h-[75px] relative mr-4 lgmx:w-[60px] lgmx:h-[65px]">
             <Image src="/snake-3.png" fill sizes="100%" alt="step-1" />
           </div>
           <div className="flex flex-col">

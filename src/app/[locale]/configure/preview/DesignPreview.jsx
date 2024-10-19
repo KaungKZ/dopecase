@@ -121,35 +121,12 @@ export default function DesignPreview(props) {
 
   return (
     <>
-      <div className="my-24">
+      <div className="my-24 lgmx:my-16">
         <div></div>
-        <div className="flex flex-col items-center md:grid text-sm sm:grid-cols-12 sm:grid-rows-1 sm:gap-x-6 md:gap-x-8 lg:gap-x-12">
-          <div className="md:col-span-4 lg:col-span-3 md:row-span-2 md:row-end-2">
-            {/* <div className="relative max-w-[245px] h-[500px] overflow-hidden">
-              <Image
-                src="/phone-template.png"
-                alt="phone template"
-                fill
-                className="pointer-events-none select-none z-30 "
-              />
-              <div
-                className={cn(
-                  "absolute inset-0 left-[3px] top-px right-[2px] bottom-px rounded-[32px]",
-                  `bg-[${selectedColorCode}]`
-                )}
-              />
-              <div className="absolute -z-10 inset-0">
-                <Image
-                  src={croppedImageUrl}
-                  alt="phone preview"
-                  fill
-                  className="pointer-events-none select-none"
-                />
-              </div>
-            </div> */}
-
+        <div className="grid text-sm grid-cols-12 grid-rows-1 gap-x-6 lgmx:flex lgmx:flex-col">
+          <div className="col-span-4 md:row-span-2 md:row-end-2 lgmx:flex lgmx:justify-center">
             <div
-              className={`relative pointer-events-none z-50 overflow-hidden ${`bg-[${selectedColorCode}]`} max-w-[245px] h-[500px]`}
+              className={`relative pointer-events-none z-50 overflow-hidden ${`bg-[${selectedColorCode}]`} w-[245px] h-[500px] lgmx:w-[200px] lgmx:h-[400px]`}
             >
               <Image
                 src="/phone-template-white-edges.png"
@@ -176,20 +153,20 @@ export default function DesignPreview(props) {
             </div>
           </div>
           <div className=" sm:col-span-9 md:row-end-1">
-            <h2 className="text-primary font-bold text-lg">
+            <h2 className="text-primary font-bold text-lg lgmx:hidden">
               You are only 1 step away !
             </h2>
-            <h2 className="font-recursive text-3xl font-bold mt-4">
+            <h2 className="font-recursive text-3xl font-bold mt-4 lgmx:text-center lgmx:mt-8">
               Your {matchingModelsValue[model]} Case
             </h2>
-            <div className="flex space-x-2 items-center mt-3">
+            <div className="flex space-x-2 items-center mt-3 lgmx:justify-center">
               <Check className="text-primary h-5 w-5" />
               <span className="font-recursive text-base">
                 In stock and ready to ship
               </span>
             </div>
             <div className="mt-10">
-              <div className="flex justify-between">
+              <div className="flex justify-between mdmx:flex-col mdmx:space-y-6">
                 <div>
                   <span className="font-recursive font-bold text-base">
                     Highlights
@@ -216,7 +193,7 @@ export default function DesignPreview(props) {
                 </div>
               </div>
               <div className="w-full h-px bg-zinc-200 my-10"></div>
-              <div className="px-7 flex flex-col space-y-3">
+              <div className="px-7 flex flex-col space-y-3 mdmx:px-0">
                 <div className="flex justify-between">
                   <span className="text-zinc-700 font-recursive">
                     Base price
@@ -263,9 +240,9 @@ export default function DesignPreview(props) {
                   </span>
                 </div>
               </div>
-              <div className="flex justify-end mt-10">
+              <div className="flex justify-end mt-10 mdmx:mt-6">
                 <ButtonComponent
-                  cls="px-10"
+                  cls="px-10 smmx:w-full "
                   color="primary"
                   isLoading={isPending}
                   isDisabled={data.status === "loading"}

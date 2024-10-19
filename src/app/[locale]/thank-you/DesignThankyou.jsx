@@ -142,12 +142,14 @@ export default function DesignThankyou() {
       <div>
         <div>
           <span className="text-primary font-semibold">Thank you!</span>
-          <h2 className="text-4xl font-bold mt-1">Your case is on the way</h2>
+          <h2 className="text-4xl font-bold mt-1 smmx:text-3xl">
+            Your case is on the way
+          </h2>
         </div>
         <div className="w-full my-10 block">
           <span className="text-gray-600">Order number:</span>
           <br />
-          <span className="text-primary font-bold text-lg">
+          <span className="text-primary font-bold text-lg smmx:text-base">
             {"  "}
             {orderId}
           </span>
@@ -172,7 +174,7 @@ export default function DesignThankyou() {
               style={{
                 left:
                   renderedDimensions.width / 2 -
-                  renderedDimensions.width / (1216 / 104),
+                  renderedDimensions.width / (1216 / 105),
                 top: renderedDimensions.height / 5.9,
               }}
             >
@@ -248,18 +250,35 @@ export default function DesignThankyou() {
           <div className="flex flex-col space-y-6">
             <div className="flex justify-between">
               <span className="font-recursive  text-zinc-900">Subtotal</span>
-              <span className="text-zin-700">{formatPrice(totalPrice)}</span>
+              <span className="text-zin-700 font-semibold">
+                {formatPrice(totalPrice)}
+              </span>
             </div>
             <div className="flex justify-between">
               <span className="font-recursive text-zinc-900">Shipping</span>
-              <span className="text-zin-700">{formatPrice(0)}</span>
+              <span className="text-zin-700 ">{formatPrice(0)}</span>
             </div>
             <div className="w-full h-px bg-zinc-200 my-10"></div>
 
             <div className="flex justify-between">
               <span className="font-recursive  text-zinc-900">Total</span>
-              <span className="text-zin-700">{formatPrice(totalPrice)}</span>
+              <span className="text-zin-700 font-bold">
+                {formatPrice(totalPrice)}
+              </span>
             </div>
+          </div>
+          <div className="flex justify-center mt-10 space-x-5">
+            <ButtonComponent
+              link="/"
+              transparent
+              cls="text-sm font-medium hover:bg-accent text-foreground/90"
+            >
+              Back to home
+            </ButtonComponent>
+
+            <ButtonComponent link="/en/configure/upload">
+              Make Another Case
+            </ButtonComponent>
           </div>
         </div>
       </div>

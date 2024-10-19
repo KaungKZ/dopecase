@@ -139,7 +139,7 @@ body {
   color: white;
 }
 .phone-skew {
-  transform: perspective(400px) rotateY(3deg) skewX(11.1deg) skewY(-10.9deg);
+  transform: perspective(400px) rotateY(4deg) skewX(11.4deg) skewY(-10.9deg);
 }
 
 .grainy-light {
@@ -175,3 +175,16 @@ th {
 tfoot th {
   font-weight: normal;
 } */
+
+@media (max-width: 1023px) {
+  .mantine-ScrollArea-viewport,
+  .mantine-ScrollArea-root {
+    overflow: initial !important;
+    scrollbar-width: initial;
+  }
+
+  .mantine-ScrollArea-viewport {
+    width: auto;
+    height: auto;
+  }
+}
