@@ -267,7 +267,7 @@ export default function DesignPreview(props) {
         <div>
           <ScrollArea className="relative flex-1 h-full px-4">
             <div className=" flex justify-center">
-              <div className="relative w-24 h-28">
+              <div className="relative w-24 h-28 smmx:w-16 smmx:h-20">
                 <Image src="/snake-1.png" fill alt="log in modal popup" />
               </div>
             </div>

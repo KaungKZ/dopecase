@@ -24,7 +24,7 @@ export default function GuestAccountNav({ domain, locale }) {
   // );
 
   return (
-    <div className="border-r-2 border-zinc-200 flex">
+    <div className="border-r-2 border-zinc-200 flex mdmx:border-none">
       <ButtonComponent
         link="/auth/register"
         onClick={() => {

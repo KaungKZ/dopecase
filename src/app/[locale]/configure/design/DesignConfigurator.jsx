@@ -337,7 +337,10 @@ export default function DesignConfigurator(props) {
                 onSubmit={formik.handleSubmit}
                 className="h-[37.5rem] flex flex-col lgmx:h-auto"
               >
-                <ScrollArea className="px-8 relative flex-1 h-full">
+                <ScrollArea
+                  className="px-8 relative flex-1 h-full case-scrollarea"
+                  // classNames="case-scrollarea"
+                >
                   <div
                     aria-hidden="true"
                     className="absolute z-10 inset-x-0 bottom-0 h-12 bg-gradient-to-t from-white pointer-events-none"

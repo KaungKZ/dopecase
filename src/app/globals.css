@@ -177,14 +177,20 @@ tfoot th {
 } */
 
 @media (max-width: 1023px) {
-  .mantine-ScrollArea-viewport,
-  .mantine-ScrollArea-root {
+  .case-scrollarea .mantine-ScrollArea-viewport,
+  .case-scrollarea.mantine-ScrollArea-root {
     overflow: initial !important;
     scrollbar-width: initial;
   }
 
-  .mantine-ScrollArea-viewport {
+  .case-scrollarea .mantine-ScrollArea-viewport {
     width: auto;
     height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .login-modal .mantine-Modal-content {
+    min-width: 100%;
   }
 }
