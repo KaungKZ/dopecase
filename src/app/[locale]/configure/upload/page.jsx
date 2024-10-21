@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useTransition } from "react";
+import React, { useState, useTransition } from "react";
 import { Progress } from "@mantine/core";
 import Dropzone, { FileRejection } from "react-dropzone";
 import { Image, Loader2, MousePointerSquareDashed } from "lucide-react";
@@ -10,21 +10,18 @@ import MaxWidthWrapper from "../../../../components/MaxWidthWrapper";
 import { useRouter } from "next/navigation";
 import Steps from "../../../../components/Steps";
 
-export default function page() {
+export default function Page() {
   const [isDragOver, setIsDragOver] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isPending, startTransition] = useTransition();
   const [uploadErr, setUploadErr] = useState("");
-  // const isPending = true;
-  const router = useRouter();
 
-  // const isUploading = true;
+  const router = useRouter();
 
   const { startUpload, permittedFileInfo, isUploading } = useUploadThing(
     "imageUploader",
     {
       onClientUploadComplete: ([data]) => {
-        // alert("uploaded successfully!");
         const configId = data.serverData.configId;
 
         startTransition(() => {
@@ -32,13 +29,11 @@ export default function page() {
         });
       },
       onUploadError: (err) => {
-        // console.log(typeof err);
         if (err.message.toLowerCase().includes("filesizemismatch")) {
           setUploadErr("File size must not exceed 4MB");
         } else {
           setUploadErr(err.message);
         }
-        // alert("error occurred while uploading");
       },
       onUploadBegin: () => {
         // alert("upload has begun");
@@ -49,16 +44,12 @@ export default function page() {
     }
   );
 
-  // const isUploading = false;
-
   function handleDropAccepted(acceptedFiles) {
     startUpload(acceptedFiles, { configId: undefined });
     setIsDragOver(false);
   }
 
   function handleDropRejected(rejectedFiles) {
-    // startUpload(acceptedFiles, { configId: undefined });
-
     const [file] = rejectedFiles;
 
     setIsDragOver(false);
@@ -106,7 +97,10 @@ export default function page() {
                     ) : isUploading || isPending ? (
                       <Loader2 className="animate-spin w-6 h-6 mb-2 text-zinc-500" />
                     ) : (
-                      <Image className="w-6 h-6 mb-2 text-zinc-500" />
+                      <Image
+                        className="w-6 h-6 mb-2 text-zinc-500"
+                        alt="no-img"
+                      />
                     )}
                     {isUploading ? (
                       <div>

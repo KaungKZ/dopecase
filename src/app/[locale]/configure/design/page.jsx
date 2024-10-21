@@ -5,9 +5,8 @@ import DesignConfigurator from "./DesignConfigurator";
 import Steps from "../../../../components/Steps";
 import { notFound } from "next/navigation";
 
-export default async function page(props) {
+export default async function Page(props) {
   const { id } = props.searchParams;
-  // const router = useRouter();
 
   if (!id || typeof id !== "string") {
     return notFound();
@@ -23,9 +22,6 @@ export default async function page(props) {
 
   const { imageUrl, width, height } = configuration;
 
-  // console.log(configuration);
-
-  //   console.log(props);
   return (
     <section>
       <MaxWidthWrapper>

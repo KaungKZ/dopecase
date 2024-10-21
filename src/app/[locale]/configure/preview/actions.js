@@ -6,8 +6,6 @@ import { authOption } from "@/lib/config/authOption";
 import { stripeconfig } from "../../../../lib/stripeconfig";
 
 export default async function handleCheckout(params) {
-  // console.log(params)
-
   const { configId, locale } = params;
 
   const data = await getServerSession(authOption);
@@ -17,7 +15,6 @@ export default async function handleCheckout(params) {
       id: configId,
     },
   });
-  // console.log(configuration, data);
 
   if (!data) {
     throw new Error("You need to be logged in");
@@ -74,12 +71,4 @@ export default async function handleCheckout(params) {
   });
 
   return { url: stripeSession.url };
-
-  // await db.order.create({
-  //   data: {
-  //     configurationId: configuration.id,
-  //     userId: data.id,
-  //     totalPrice: configuration.totalPrice
-  //   },
-  // });
 }

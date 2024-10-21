@@ -4,32 +4,12 @@ import Image from "next/image";
 import { Check, Star, ArrowRight } from "lucide-react";
 import MaxWidthWrapper from "../../components/MaxWidthWrapper";
 import { Icons } from "../../components/Icons";
-import { getServerSession } from "next-auth";
-import { authOption } from "@/lib/config/authOption";
-import { headers } from "next/headers";
 
-// import { authOption } from "../../lib/config/authOption";
 import YourImage from "../../../public/your-image.png";
 import { Reviews } from "../../components/Review";
 import ButtonComponent from "../../components/ButtonComponent";
-import UserAccountNav from "@/components/UserAccountNav";
-import GuestAccountNav from "@/components/GuestAccountNav";
-// import { getLocale } from "next-intl/server";
 
-export default async function Home({ params }) {
-  // const t = await getDictionary(lang);
-  const data = await getServerSession(authOption);
-
-  const isLoggedIn = data?.user;
-  const username = data?.user.name || data?.user.username;
-  const isAdmin = data?.user.email === process.env.ADMIN_EMAIL;
-  const headersList = headers();
-  const domain = headersList.get("host") || "";
-  // console.log(params);
-
-  // console.log(getLocale());
-  // const session = await getServerSession(authOption);
-  // console.log("session", session);
+export default async function Page() {
   return (
     <main className="w-full ">
       <MaxWidthWrapper>
@@ -166,8 +146,6 @@ export default async function Home({ params }) {
             />
           </div>
         </section>
-        {/* <p className=" w-full justify-center text-black">{t.home.title}</p> */}
-        {/* <Image width={500} height={200} src="/snake-1.png" alt="snake"></Image> */}
       </MaxWidthWrapper>
       <section className="bg-slate-100 pb-6 pt-20">
         <MaxWidthWrapper>
@@ -365,7 +343,6 @@ export default async function Home({ params }) {
           </div>
         </MaxWidthWrapper>
       </section>
-      {/* <Footer /> */}
     </main>
   );
 }

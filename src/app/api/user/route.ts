@@ -1,26 +1,10 @@
 import { NextResponse } from "next/server";
 import { db } from "@/db";
 const bcrypt = require("bcryptjs");
-// import * as Yup from "yup";
-
-// const validationSchema = Yup.object({
-//   username: Yup.string()
-//     .max(15, "Must be 15 characters or less")
-//     .required("Name is required"),
-//   password: Yup.string()
-//     .required("Password is required")
-//     .min(8, "Password is too short - should be 8 chars minimum.")
-//     .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
-//   email: Yup.string()
-//     .email("Invalid email address")
-//     .required("Email is required"),
-// });
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-
-    // await validationSchema.validate(body, { abortEarly: false });
 
     const { email, username, password } = body;
 
@@ -75,15 +59,5 @@ export async function POST(req: Request) {
         status: 201,
       }
     );
-  } catch (error) {
-    // const statusCode = error.statusCode || 500;
-    // const message = error.message || "Something went wrong";
-    // // debug(`Error ${statusCode}: ${message}`);
-    // return NextResponse.json(
-    //   {
-    //     error: message,
-    //   },
-    //   { status: statusCode }
-    // );
-  }
+  } catch (error) {}
 }

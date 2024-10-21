@@ -12,7 +12,6 @@ export default async function getPaymentStatus({ orderId }) {
     err.unauthorize = true;
 
     return err;
-    // throw new Error("You need to be logged in");
   }
 
   const order = await db.order.findFirst({
@@ -31,12 +30,8 @@ export default async function getPaymentStatus({ orderId }) {
   if (!order) {
     err.notExist = true;
 
-    //  (notExist = true);
     return err;
-    // throw new Error("This order does not exist");
   }
-
-  // console.log(order);
 
   if (order.isPaid) {
     return order;

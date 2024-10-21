@@ -1,13 +1,7 @@
 {
   "root": true,
-  "extends": ["airbnb", "airbnb/hooks", "prettier"],
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 12,
-    "sourceType": "module"
-  },
+  "extends": "next/core-web-vitals",
+
   "plugins": ["react"],
   "settings": {
     "import/resolver": {
@@ -24,48 +18,7 @@
     }
   },
   "rules": {
-    "react/prop-types": 0,
-    "react/no-unknown-property": [
-      2,
-      {
-        "ignore": ["jsx"]
-      }
-    ],
-    "react/no-unstable-nested-components": [
-      "off",
-      {
-        "allowAsProps": true,
-        "customValidators": [] /* optional array of validators used for propTypes validation */
-      }
-    ],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "camelcase": "off",
-    "import/no-cycle": "off",
-    "react/jsx-props-no-spreading": "off",
-    "react/jsx-no-bind": [
-      1,
-      {
-        "ignoreRefs": true,
-        "allowArrowFunctions": true,
-        "allowFunctions": true,
-        "allowBind": true
-      }
-    ],
-    "jsx-a11y/label-has-associated-control": [
-      "error",
-      {
-        "required": {
-          "some": ["nesting", "id"]
-        }
-      }
-    ],
-    "jsx-a11y/label-has-for": [
-      "error",
-      {
-        "required": {
-          "some": ["nesting", "id"]
-        }
-      }
-    ]
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-img-element": "off"
   }
 }

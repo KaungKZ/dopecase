@@ -1,29 +1,17 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { signOut } from "next-auth/react";
 import { ChevronDown } from "lucide-react";
 
 import ButtonComponent from "./ButtonComponent";
 import { cn } from "../lib/utils";
-// import useComponentVisible from "./useComponentVisible";
-import detectClickOutside from "./detectClickOutside";
 
 export default function UserAccountNav({ username, isAdmin }) {
   const [activeDropdown, setDropdown] = useState(false);
-  const [dropOpen, setDropOpen] = useState(false);
-  // const { ref, isComponentVisible } = useComponentVisible(true);
+
   const ref = useRef();
 
-  // detectClickOutside(ref, dropOpen, setDropOpen);
-
-  // useEffect(() => {
-  //   document.addEventListener("mousedown", () => {
-  //     console.log("clicked");
-  //   });
-  // }, []);
-
-  // console.log(isComponentVisible);
   return (
     <>
       <div className=" flex items-center">
@@ -54,7 +42,6 @@ export default function UserAccountNav({ username, isAdmin }) {
             )}
           >
             <ButtonComponent
-              //  link="/auth/register"
               transparent
               onClick={() => {
                 signOut();

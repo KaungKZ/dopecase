@@ -1,28 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ButtonComponent from "./ButtonComponent";
-import { useRouter } from "next/navigation";
-import { getLocale } from "next-intl/server";
 
-export default function GuestAccountNav({ domain, locale }) {
-  //   const [url, setURL] = useState("");
-  //   const pathname = usePathname();
-  // const router = useRouter();
-  //   console.log(url);
-  //   console.log(router, pathname);
-
-  //   useEffect(() => {
-  //     if (typeof window !== undefined) {
-  //       setURL(window.location.href);
-  //     }
-  //   }, []);
-
-  // console.log(
-  //   window.location.href,
-  //   process.env.NEXT_PUBLIC_SERVER_URL + locale
-  // );
-
+export default function GuestAccountNav({ locale }) {
   return (
     <div className="border-r-2 border-zinc-200 flex mdmx:border-none">
       <ButtonComponent
@@ -39,7 +20,6 @@ export default function GuestAccountNav({ domain, locale }) {
               )[1]
             );
           }
-          // router.push("/auth/register");
         }}
         transparent
         cls="text-sm font-medium hover:bg-accent text-foreground/90"
@@ -62,7 +42,6 @@ export default function GuestAccountNav({ domain, locale }) {
               )[1]
             );
           }
-          // router.push("/auth/login");
         }}
       >
         Log In

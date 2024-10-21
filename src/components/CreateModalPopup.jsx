@@ -9,8 +9,6 @@ export default function CreateModalPopup(props) {
         {/* Modal content */}
         {props.children}
       </Modal>
-
-      {/* <Button onClick={open}>Open modal</Button> */}
     </>
   );
 }

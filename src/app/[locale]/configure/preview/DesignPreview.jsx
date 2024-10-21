@@ -11,21 +11,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { Check, ArrowRight } from "lucide-react";
 import ButtonComponent from "@/components/ButtonComponent.jsx";
-import { cn } from "@/lib/utils.js";
 import { Formik } from "formik";
 import * as Yup from "yup";
-// import { useSession } from "next-auth/react";
 import GoogleButton from "@/components/GoogleButton.jsx";
-import {
-  Input,
-  TextInput,
-  PasswordInput,
-  Button,
-  ScrollArea,
-} from "@mantine/core";
+import { TextInput, PasswordInput, ScrollArea } from "@mantine/core";
 import { ConnectedFocusError } from "focus-formik-error";
 import { signIn, useSession } from "next-auth/react";
-
 import { authOption } from "@/lib/config/authOption";
 import CreateModalPopup from "../../../../components/CreateModalPopup.jsx";
 import { useDisclosure } from "@mantine/hooks";
@@ -36,8 +27,7 @@ import { useRouter } from "next/navigation";
 export default function DesignPreview(props) {
   const {
     croppedImageUrl,
-    width,
-    height,
+
     id,
     color,
     model,
@@ -48,15 +38,10 @@ export default function DesignPreview(props) {
 
   const { locale } = props;
 
-  // console.log(props);
-
   const [visible, { toggle }] = useDisclosure(false);
   const data = useSession(authOption);
   const [modalLoginLoading, setModalLoginLoading] = useState(false);
 
-  // console.log("rendered");
-
-  // const { update } = useSession(authOption);
   const router = useRouter();
   const [opened, { open, close }] = useDisclosure(false);
   const validationSchema = Yup.object({
@@ -64,8 +49,6 @@ export default function DesignPreview(props) {
       .max(15, "Must be 15 characters or less")
       .required("Username is required"),
     password: Yup.string().required("Password is required"),
-    // .min(8, "Password is too short - should be 8 chars minimum.")
-    // .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
   });
   const selectedColorCode =
     colors.find((c) => c.name === color).code || "#181818";
@@ -83,7 +66,6 @@ export default function DesignPreview(props) {
   });
 
   async function handleLogin(values) {
-    // console.log(values);
     setModalLoginLoading(true);
     const signInData = await signIn("credentials", {
       username: values.username,
@@ -91,22 +73,15 @@ export default function DesignPreview(props) {
       redirect: false,
     });
 
-    // console.log(signInData);
     setModalLoginLoading(false);
 
     if (signInData.error) {
       console.log(signInData.error);
     } else {
-      // const { data: session } = useSession()
-
       if (data) {
-        // router.push(`/en?redirectLogin=true`);
         close();
-        // update();
         router.refresh(); // i think
       }
-
-      // router.push({ pathname: "/en", query: { redirectLogin: "true" } });
     }
   }
 
@@ -134,12 +109,7 @@ export default function DesignPreview(props) {
                 fill
                 alt="phone image"
               />
-              {/* <div
-                className={cn(
-                  "absolute inset-0 left-[3px] top-px right-[2px] bottom-px rounded-[32px]",
-                  `bg-[${selectedColorCode}]`
-                )}
-              /> */}
+
               <div className="absolute -z-10 inset-0">
                 {croppedImageUrl && (
                   <Image
@@ -246,9 +216,7 @@ export default function DesignPreview(props) {
                   color="primary"
                   isLoading={isPending}
                   isDisabled={data.status === "loading"}
-                  // isLoading={test}
                   onClick={() => handleClickCheckout()}
-                  // onClick={() => setTest((prev) => !prev)}
                 >
                   Check Out
                   <ArrowRight className="text-white h-5 w-5 ml-1.5" />

@@ -1,13 +1,11 @@
 "use client";
 
 import React from "react";
-// import { signIn, signOut, auth } from "../../../../../auth";
-// import { AuthError } from "next-auth";
 import LoginForm from "../../../../components/LoginForm";
 import Image from "next/image";
 import MaxWidthWrapper from "../../../../components/MaxWidthWrapper";
 
-export default function page() {
+export default function Page() {
   return (
     <section>
       <MaxWidthWrapper cls="max-w-[640px]">
@@ -22,7 +20,6 @@ export default function page() {
               alt="register-icon"
             />
           </div>
-          {/* <h2 className="text-2xl mt-5">Get Started Today !</h2> */}
         </div>
 
         <div>

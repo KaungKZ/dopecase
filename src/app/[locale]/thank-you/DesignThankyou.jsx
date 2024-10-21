@@ -1,18 +1,17 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-// import { useQuery } from "@tanstack/react-query";
 import { useQuery } from "@tanstack/react-query";
 import getPaymentStatus from "./actions";
-import { Image, Loader2, MousePointerSquareDashed } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { AspectRatio } from "@mantine/core";
 import { cn, formatPrice } from "@/lib/utils";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import ButtonComponent from "@/components/ButtonComponent";
 
 export default function DesignThankyou() {
   const searchParams = useSearchParams();
-  const router = useRouter();
+
   const caseRef = useRef();
   const orderId = searchParams.get("orderID") || "";
   const { data } = useQuery({
@@ -38,9 +37,7 @@ export default function DesignThankyou() {
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  }, [caseRef.current]);
-
-  // console.log(data);
+  }, []);
 
   if (data === undefined) {
     return (
@@ -101,7 +98,6 @@ export default function DesignThankyou() {
                     process.env.NEXT_PUBLIC_SERVER_URL
                   )[1]
                 );
-                // router.push("/auth/register");
               }}
               transparent
               cls="text-sm font-medium hover:bg-accent text-foreground/90"
@@ -118,7 +114,6 @@ export default function DesignThankyou() {
                     process.env.NEXT_PUBLIC_SERVER_URL
                   )[1]
                 );
-                // router.push("/auth/login");
               }}
             >
               Log In
@@ -134,8 +129,6 @@ export default function DesignThankyou() {
   let caseBackgroundColor = "bg-zinc-950";
   if (configuration.color === "blue") caseBackgroundColor = "bg-blue-950";
   if (configuration.color === "rose") caseBackgroundColor = "bg-rose-950";
-
-  // console.log(shippingAddress, billingAddress);
 
   return (
     <div className="my-16">
@@ -184,6 +177,7 @@ export default function DesignThankyou() {
                   "phone-skew relative z-20 rounded-t-[15px] rounded-b-[10px] md:rounded-t-[30px] md:rounded-b-[20px]",
                   caseBackgroundColor
                 )}
+                alt="thankyou-phone-cover"
                 src={configuration.croppedImageUrl}
               />
             </div>
@@ -206,7 +200,7 @@ export default function DesignThankyou() {
               <address className="mt-3">
                 <span className="block">{shippingAddress.name}</span>
                 <span className="block">{shippingAddress.street}</span>
-                {/* <span className="block">{shippingAddress.city}</span> */}
+
                 <span className="block">
                   {shippingAddress.postalCode} {shippingAddress.city}
                 </span>
@@ -220,7 +214,7 @@ export default function DesignThankyou() {
               <address className="mt-3">
                 <span className="block">{billingAddress.name}</span>
                 <span className="block">{billingAddress.street}</span>
-                {/* <span className="block">{shippingAddress.city}</span> */}
+
                 <span className="block">
                   {billingAddress.postalCode} {billingAddress.city}
                 </span>
@@ -228,7 +222,7 @@ export default function DesignThankyou() {
               </address>
             </div>
           </div>
-          {/* <div className="mt-10 border-t border-zinc-200" /> */}
+
           <div className="w-full h-px bg-zinc-200 my-10"></div>
           <div className="grid grid-cols-2 mt-6 gap-x-6">
             <div>

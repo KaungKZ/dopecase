@@ -3,36 +3,27 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Input, TextInput, PasswordInput, Button } from "@mantine/core";
+import { TextInput, PasswordInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import ButtonComponent from "./ButtonComponent";
 import GoogleButton from "./GoogleButton";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ConnectedFocusError } from "focus-formik-error";
-import { signIn, useSession } from "next-auth/react";
-import { authOption } from "../lib/config/authOption";
+import { signIn } from "next-auth/react";
 
 export default function LoginForm() {
   const [visible, { toggle }] = useDisclosure(false);
-  const data = useSession(authOption);
   const [isLoading, setIsLoading] = useState(false);
-  // console.log(data);
-  const pathname = usePathname();
   const router = useRouter();
   const validationSchema = Yup.object({
     username: Yup.string()
       .max(15, "Must be 15 characters or less")
       .required("Username is required"),
     password: Yup.string().required("Password is required"),
-    // .min(8, "Password is too short - should be 8 chars minimum.")
-    // .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
   });
 
-  // console.log(data);
-
   async function handleOnSubmit(values) {
-    // console.log(values);
     setIsLoading(true);
     const signInData = await signIn("credentials", {
       username: values.username,
@@ -40,13 +31,10 @@ export default function LoginForm() {
       redirect: false,
     });
 
-    // console.log(signInData);
     setIsLoading(false);
     if (signInData.error) {
       console.log(signInData.error);
     } else {
-      // const { data } = useSession(authOption);
-      // if (data) {
       const redirectURL = localStorage.getItem("redirectURL");
       if (redirectURL && !redirectURL.includes("/auth/register")) {
         router.push(redirectURL);
@@ -54,11 +42,7 @@ export default function LoginForm() {
         router.push(`/`);
       }
       if (redirectURL) localStorage.removeItem("redirectURL");
-      // router.push("/"); // i think
       router.refresh();
-      // router.push(`/en?redirectLogin=true`);
-      // }
-      // router.push({ pathname: "/en", query: { redirectLogin: "true" } });
     }
   }
   return (
@@ -90,18 +74,8 @@ export default function LoginForm() {
                 }
                 {...formik.getFieldProps("username")}
               />
-
-              {/* <div className="h-[15px] error-wrapper-empty"></div> */}
             </div>
 
-            {/* <input
-              id="firstName"
-              type="text"
-              {...formik.getFieldProps("firstName")}
-            />
-            {formik.touched.firstName && formik.errors.firstName ? (
-              <div>{formik.errors.firstName}</div>
-            ) : null} */}
             <div>
               <label htmlFor="password" className="input-label">
                 Password
@@ -121,21 +95,7 @@ export default function LoginForm() {
                 {...formik.getFieldProps("password")}
               />
             </div>
-            {/* <label htmlFor="lastName">Last Name</label>
-            <input
-              id="lastName"
-              type="text"
-              {...formik.getFieldProps("lastName")}
-            />
-            {formik.touched.lastName && formik.errors.lastName ? (
-              <div>{formik.errors.lastName}</div>
-            ) : null}
 
-            <label htmlFor="email">Email Address</label>
-            <input id="email" type="email" {...formik.getFieldProps("email")} />
-            {formik.touched.email && formik.errors.email ? (
-              <div>{formik.errors.email}</div>
-            ) : null} */}
             <ButtonComponent
               type="submit"
               cls="w-full min-h-11 text-base"

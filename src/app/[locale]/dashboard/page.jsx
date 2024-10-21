@@ -1,13 +1,10 @@
 import React from "react";
 import MaxWidthWrapper from "../../../components/MaxWidthWrapper";
 import { db } from "@/db";
-import { getServerSession } from "next-auth";
-import { authOption } from "@/lib/config/authOption";
+
 import DesignDashboard from "../../../components/DesignDashboard";
 
-export default async function page() {
-  const user = getServerSession(authOption);
-
+export default async function Page() {
   const orders = await db.order.findMany({
     where: {
       isPaid: true,

@@ -1,12 +1,10 @@
 /* eslint-disable react/jsx-no-useless-fragment */
+
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@mantine/core";
 import Link from "next/link";
-// import PropTypes from "prop-types";
-
-// import { cn } from "@/lib/utils";
 import { cn } from "../lib/utils";
 
 export default function ButtonComponent({
@@ -25,12 +23,8 @@ export default function ButtonComponent({
   const buttonRef = useRef(null);
 
   useEffect(() => {
-    // if (isLoading) {
     setBtnWidth(buttonRef.current.clientWidth);
-    // }
   }, []);
-
-  // console.log("rendered");
 
   return (
     <Button
@@ -76,30 +70,3 @@ export default function ButtonComponent({
     </Button>
   );
 }
-
-// ButtonComponent.propTypes = {
-//   children: PropTypes.oneOfType([PropTypes.object]).isRequired,
-//   cls: PropTypes.string,
-
-//   link: PropTypes.string,
-
-//   onClick: PropTypes.func,
-//   color: PropTypes.string,
-//   transparent: PropTypes.bool,
-//   type: PropTypes.string,
-
-//   nested: PropTypes.bool,
-// };
-
-// ButtonComponent.defaultProps = {
-//   cls: "",
-
-//   link: "",
-
-//   onClick: () => {},
-//   color: "primary",
-//   transparent: false,
-//   type: "button",
-
-//   nested: false,
-// };

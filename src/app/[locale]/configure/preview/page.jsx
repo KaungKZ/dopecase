@@ -5,12 +5,10 @@ import DesignPreview from "./DesignPreview";
 import Steps from "../../../../components/Steps";
 import { notFound } from "next/navigation";
 
-export default async function page(props) {
+export default async function Page(props) {
   const { id } = props.searchParams;
 
   const { locale } = props.params;
-
-  // const router = useRouter();
 
   if (!id || typeof id !== "string") {
     return notFound();
@@ -24,12 +22,6 @@ export default async function page(props) {
     return notFound();
   }
 
-  // const { croppedImageUrl, width, height, color, model, material, finish } =
-  //   configuration;
-
-  // console.log(configuration);
-
-  //   console.log(props);
   return (
     <section>
       <MaxWidthWrapper>

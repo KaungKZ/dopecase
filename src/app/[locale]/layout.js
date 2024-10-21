@@ -1,20 +1,14 @@
+/* eslint-disable react/no-children-prop */
+
 import React from "react";
-// import { Inter } from "next/font/google";
 import "@mantine/core/styles.css";
-// import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import NextTopLoader from "nextjs-toploader";
 import AuthProvider from "../../components/AuthProvider";
 import { constructMetadata } from "../../lib/utils";
-// import PropTypes from "prop-types";
-import {
-  ColorSchemeScript,
-  MantineProvider,
-  createTheme,
-  Input,
-} from "@mantine/core";
+import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
 import "../globals.css";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -38,13 +32,7 @@ const recursive = localFont({
 export const metadata = constructMetadata();
 
 const theme = createTheme({
-  components: {
-    // Input: Input.extend({
-    //   classNames: {
-    //     input: "border: 1px solid var(--mantine-color-violet-filled)",
-    //   },
-    // }),
-  },
+  components: {},
   colors: {
     primary: [
       "#aedbb6",
@@ -88,7 +76,6 @@ export default async function RootLayout({ children, params }) {
           <RQProviders children={children}>
             <AuthProvider>
               <NextTopLoader color="#39ad5d" />
-              {/* {children} */}
               <MantineProvider theme={theme}>
                 <Navbar />
                 {children}
@@ -101,8 +88,3 @@ export default async function RootLayout({ children, params }) {
     </html>
   );
 }
-
-// RootLayout.propTypes = {
-//   children: PropTypes.oneOfType([PropTypes.object]).isRequired,
-//   params: PropTypes.oneOfType([PropTypes.object]).isRequired,
-// };

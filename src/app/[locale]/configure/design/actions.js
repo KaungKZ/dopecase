@@ -1,6 +1,5 @@
 "use server";
 
-import React from "react";
 import { db } from "@/db";
 
 export default async function saveConfig({

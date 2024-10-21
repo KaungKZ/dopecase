@@ -1,5 +1,4 @@
 import React from "react";
-// import PropTypes from "prop-types";
 
 import { cn } from "../lib/utils";
 
@@ -12,12 +11,3 @@ export default function MaxWidthWrapper({ children, cls = "" }) {
     </div>
   );
 }
-
-// MaxWidthWrapper.propTypes = {
-//   children: PropTypes.oneOfType([PropTypes.object]).isRequired,
-//   cls: PropTypes.string,
-// };
-
-// MaxWidthWrapper.defaultProps = {
-//   cls: "",
-// };

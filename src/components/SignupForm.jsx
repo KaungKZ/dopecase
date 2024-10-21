@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Input, TextInput, PasswordInput, Button } from "@mantine/core";
+import { TextInput, PasswordInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import ButtonComponent from "./ButtonComponent";
 import GoogleButton from "./GoogleButton";
@@ -31,7 +31,6 @@ export default function SignupForm() {
 
   async function handleOnSubmit(values) {
     setIsLoading(true);
-    // console.log(values);
     const res = await fetch("/api/user", {
       method: "POST",
       headers: {
@@ -62,7 +61,6 @@ export default function SignupForm() {
         }, 8000);
       }
 
-      // console.log(err);
       console.error("Registration failed");
     }
   }
@@ -95,8 +93,6 @@ export default function SignupForm() {
                 }
                 {...formik.getFieldProps("username")}
               />
-
-              {/* <div className="h-[15px] error-wrapper-empty"></div> */}
             </div>
             <div>
               <label htmlFor="email" className="input-label">
@@ -116,14 +112,6 @@ export default function SignupForm() {
               />
             </div>
 
-            {/* <input
-              id="firstName"
-              type="text"
-              {...formik.getFieldProps("firstName")}
-            />
-            {formik.touched.firstName && formik.errors.firstName ? (
-              <div>{formik.errors.firstName}</div>
-            ) : null} */}
             <div>
               <label htmlFor="password" className="input-label">
                 Password
@@ -143,21 +131,7 @@ export default function SignupForm() {
                 {...formik.getFieldProps("password")}
               />
             </div>
-            {/* <label htmlFor="lastName">Last Name</label>
-            <input
-              id="lastName"
-              type="text"
-              {...formik.getFieldProps("lastName")}
-            />
-            {formik.touched.lastName && formik.errors.lastName ? (
-              <div>{formik.errors.lastName}</div>
-            ) : null}
 
-            <label htmlFor="email">Email Address</label>
-            <input id="email" type="email" {...formik.getFieldProps("email")} />
-            {formik.touched.email && formik.errors.email ? (
-              <div>{formik.errors.email}</div>
-            ) : null} */}
             <ButtonComponent
               type="submit"
               cls="w-full min-h-11 text-base"

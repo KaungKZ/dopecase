@@ -15,11 +15,8 @@ import NextImage from "next/image";
 import { ArrowRight } from "lucide-react";
 import { cn } from "../../../../lib/utils.js";
 import DndHandler from "../../../../components/DndHandler.jsx";
-// import useMutation from "@tanstack/react-query";
 import ButtonComponent from "@/components/ButtonComponent.jsx";
 import { Formik } from "formik";
-import * as Yup from "yup";
-// import { useUploadThing } from "../../../../lib/uploadthing.ts";
 import { useUploadThing } from "@/lib/uploadthing.ts";
 import saveConfig from "./actions.js";
 import { useMutation } from "@tanstack/react-query";
@@ -33,7 +30,6 @@ import {
 } from "../../../../lib/config/products.js";
 
 export default function DesignConfigurator(props) {
-  // const [value, setValue] = useState(null);
   const { imageUrl, width, height, configId } = props;
   const router = useRouter();
   const [formValues, setFormValues] = useState({
@@ -47,7 +43,6 @@ export default function DesignConfigurator(props) {
       price: finishes[0].price,
     },
     color: colors[0].name,
-    // totalPrice: 0,
   });
   const containerRef = useRef(null);
   const caseRef = useRef(null);
@@ -88,16 +83,7 @@ export default function DesignConfigurator(props) {
     return new Blob([byteArray], { type: mime });
   }
 
-  // function insideScrollareaContent () {
-  //   return (
-  //     <>
-  //     </>
-  //   )
-  // }
-
   async function saveImageConfiguration() {
-    // console.log(values);
-
     try {
       const {
         top: caseTop,
@@ -130,13 +116,13 @@ export default function DesignConfigurator(props) {
       userImage.src = imageUrl;
       await new Promise((resolve) => (userImage.onload = resolve));
 
-      console.log(
-        userImage,
-        actualX,
-        actualY,
-        renderedDimensions.width,
-        renderedDimensions.height
-      );
+      // console.log(
+      //   userImage,
+      //   actualX,
+      //   actualY,
+      //   renderedDimensions.width,
+      //   renderedDimensions.height
+      // );
 
       ctx?.drawImage(
         userImage,
@@ -172,8 +158,6 @@ export default function DesignConfigurator(props) {
     },
   });
 
-  // console.log(colors.filter((c) => c.name === formValues.color));
-
   const circles = (arr) => {
     return arr.map((item) => (
       <Radio.Card
@@ -186,24 +170,15 @@ export default function DesignConfigurator(props) {
         value={item.name}
         key={item.name}
       >
-        <Group>
-          {/* <Radio.Indicator /> */}
-          {/* <div className={cn("w-6 h-6 rounded-full", `bg-${item}`)}></div> */}
-        </Group>
+        <Group></Group>
       </Radio.Card>
     ));
   };
 
   const cards = (arr) => {
     return arr.map((item) => (
-      <Radio.Card
-        // className={classes.root}
-        radius="md"
-        value={item.value}
-        key={item.value}
-      >
+      <Radio.Card radius="md" value={item.value} key={item.value}>
         <Group wrap="nowrap" align="flex-start">
-          {/* <Radio.Indicator /> */}
           <div className="flex justify-between items-start w-full py-4 px-5">
             <div className="flex flex-col">
               <span className="font-recursive text-sm font-semibold">
@@ -236,16 +211,9 @@ export default function DesignConfigurator(props) {
               className="aspect-[896/1831] w-full relative z-30 pointer-events-none"
               ref={caseRef}
             >
-              {/* <img
-                src="/phone-template.png"
-                alt="phone template"
-                className="pointer-events-none select-none w-full h-full"
-              /> */}
               <NextImage
                 src="/phone-template.png"
                 alt="phone template"
-                // width={240}
-                // height={120}
                 fill
                 className="pointer-events-none select-none"
               />
@@ -303,11 +271,6 @@ export default function DesignConfigurator(props) {
                 fill
                 className="pointer-events-none"
               />
-              {/* <img
-                src={imageUrl}
-                alt="your image"
-                className="pointer-events-none w-full h-full"
-              /> */}
             </div>
           </Rnd>
         </div>
@@ -320,7 +283,6 @@ export default function DesignConfigurator(props) {
               colors: formValues.color,
             }}
             enableReinitialize
-            // validationSchema={validationSchema}
             onSubmit={(values) => {
               saveConfigMutation({
                 color: values.colors,
@@ -337,10 +299,7 @@ export default function DesignConfigurator(props) {
                 onSubmit={formik.handleSubmit}
                 className="h-[37.5rem] flex flex-col lgmx:h-auto"
               >
-                <ScrollArea
-                  className="px-8 relative flex-1 h-full case-scrollarea"
-                  // classNames="case-scrollarea"
-                >
+                <ScrollArea className="px-8 relative flex-1 h-full case-scrollarea">
                   <div
                     aria-hidden="true"
                     className="absolute z-10 inset-x-0 bottom-0 h-12 bg-gradient-to-t from-white pointer-events-none"
@@ -399,7 +358,6 @@ export default function DesignConfigurator(props) {
                           });
                         }}
                         data={availableDevices}
-                        // {...formik.getFieldProps("model")}
                       />
                     </div>
                     <div>
@@ -461,7 +419,6 @@ export default function DesignConfigurator(props) {
                   </div>
                 </ScrollArea>
 
-                {/* <ConnectedFocusError /> */}
                 <div className="px-8 w-full">
                   <div className="">
                     <div className="w-full h-px bg-zinc-200 mb-4"></div>
@@ -475,7 +432,6 @@ export default function DesignConfigurator(props) {
                       type="submit"
                       cls="min-w-full min-h-11 text-sm w-full"
                       isLoading={isPending}
-                      // isDisabled={isPending}
                     >
                       Continue
                       <ArrowRight className="text-white h-5 w-5 ml-1.5" />

@@ -5,11 +5,7 @@ import Image from "next/image";
 import SignupForm from "../../../../components/SignupForm";
 import MaxWidthWrapper from "../../../../components/MaxWidthWrapper";
 
-// const arr = ["one", "two", "three"];
-
-// console.log(arr.includes("one"));
-
-export default function page() {
+export default function Page() {
   return (
     <>
       <section>
