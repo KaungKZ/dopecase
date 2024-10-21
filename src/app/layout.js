@@ -6,26 +6,26 @@ import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import NextTopLoader from "nextjs-toploader";
-import AuthProvider from "../../components/AuthProvider";
-import { constructMetadata } from "../../lib/utils";
+import AuthProvider from "../components/AuthProvider";
+import { constructMetadata } from "../lib/utils";
 import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core";
-import "../globals.css";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
-import RQProviders from "../../components/RQProviders";
+import "./globals.css";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import RQProviders from "../components/RQProviders";
 
 const opensans = localFont({
-  src: "../../../public/fonts/OpenSans-VariableFont_wdth,wght.ttf",
+  src: "../../public/fonts/OpenSans-VariableFont_wdth,wght.ttf",
 
   variable: "--font-opensans",
 });
 const playfair = localFont({
-  src: "../../../public/fonts/PlayfairDisplay-VariableFont_wght.ttf",
+  src: "../../public/fonts/PlayfairDisplay-VariableFont_wght.ttf",
   variable: "--font-playfair",
 });
 
 const recursive = localFont({
-  src: "../../../public/fonts/Recursive-VariableFont_CASL,CRSV,MONO,slnt,wght.ttf",
+  src: "../../public/fonts/Recursive-VariableFont_CASL,CRSV,MONO,slnt,wght.ttf",
   variable: "--font-recursive",
 });
 

@@ -2,7 +2,6 @@ import { db } from "@/db";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { Resend } from "resend";
 
 export async function POST(req: Request) {
   try {
@@ -68,29 +67,6 @@ export async function POST(req: Request) {
         },
       },
     });
-
-    // need to buy domain and set in in resend dashboard
-
-    // await resend.emails.send({
-    //   from: "Dopecase <onboarding@resend.dev>",
-    //   to: [session.customer_details!.email!],
-    //   subject: "Thank you for your order !",
-    //   react: OrderReceivedEmail({
-    //     orderId,
-    //     orderDate: updatedOrder.createdAt.toLocaleDateString(),
-    //     // @ts-ignore
-    //     shippingAddress: {
-    //       name: session.customer_details!.name!,
-    //       city: shippingAddress!.city,
-
-    //       country: shippingAddress!.country,
-    //       postalCode: shippingAddress!.postal_code,
-
-    //       street: shippingAddress!.line1,
-    //       state: shippingAddress!.state,
-    //     },
-    //   }),
-    // });
 
     return NextResponse.json({ result: event, ok: true });
   } catch (err) {

@@ -32,17 +32,31 @@ export default function LoginForm() {
     });
 
     setIsLoading(false);
+
+    console.log(signInData);
     if (signInData.error) {
       console.log(signInData.error);
     } else {
       const redirectURL = localStorage.getItem("redirectURL");
-      if (redirectURL && !redirectURL.includes("/auth/register")) {
-        router.push(redirectURL);
+
+      console.log(redirectURL);
+      if (redirectURL) {
+        if (!redirectURL.includes("/auth/register")) {
+          router.push(redirectURL);
+          router.refresh(); // i think
+
+          localStorage.removeItem("redirectURL");
+        } else {
+          router.push(`/`);
+          router.refresh(); // i think
+
+          localStorage.removeItem("redirectURL");
+        }
       } else {
         router.push(`/`);
+        router.refresh(); // i think
       }
-      if (redirectURL) localStorage.removeItem("redirectURL");
-      router.refresh();
+      // router.refresh();
     }
   }
   return (
