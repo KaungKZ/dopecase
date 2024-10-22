@@ -99,7 +99,7 @@ export default async function Page() {
               <ButtonComponent
                 cls="ml-6"
                 color="primary"
-                link="/en/configure/upload"
+                link="/configure/upload"
               >
                 Create Case
                 <ArrowRight className="text-white h-5 w-5 ml-1.5" />
@@ -335,7 +335,7 @@ export default async function Page() {
             <ButtonComponent
               cls="!mt-7 mx-auto text-base"
               color="primary"
-              link="/en/configure/upload"
+              link="/configure/upload"
             >
               Create your case now
               <ArrowRight className="text-white h-5 w-5 ml-1.5" />

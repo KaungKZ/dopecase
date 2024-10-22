@@ -10,13 +10,14 @@ const publicPages = [
   "/auth/register",
   "/configure/upload",
   "/configure/design",
+
   "/configure/preview",
   "/thank-you",
   "/unauthorized-route",
   "/not-found",
 ];
 
-const privatePages = ["/dashboard"];
+const adminPages = ["/dashboard", "/user/orders"];
 const PUBLIC_FILE = /\.(.*)$/;
 
 const handleI18nRouting = createMiddleware(routing);
@@ -29,8 +30,7 @@ const authMiddleware = withAuth(
   {
     callbacks: {
       authorized: ({ token }) => {
-        console.log(token);
-        return !!token && token.email === process.env.ADMIN_EMAIL;
+        return !!token;
       },
     },
 
@@ -55,7 +55,7 @@ export default async function middleware(req: NextRequest) {
   );
 
   const privatePathnameRegex = RegExp(
-    `^(/(${routing.locales.join("|")}))?(${privatePages
+    `^(/(${routing.locales.join("|")}))?(${adminPages
       .flatMap((p) => (p === "/" ? ["", "/"] : p))
       .join("|")})/?$`,
     "i"
@@ -94,7 +94,11 @@ export default async function middleware(req: NextRequest) {
 
     // if current url is private route and user is not admin, redirect to unauthorize route
 
-    if (!isAdmin && privatePathnameRegex.test(req.nextUrl.pathname)) {
+    if (
+      !isAdmin &&
+      isPrivatePage &&
+      !req.nextUrl.pathname.startsWith(`/${locale}/user`)
+    ) {
       const unauthorizedURL = `${process.env.NEXTAUTH_URL}${locale}/unauthorized-route`;
       return NextResponse.redirect(unauthorizedURL);
     }

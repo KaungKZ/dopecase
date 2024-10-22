@@ -46,7 +46,7 @@ export default async function Navbar() {
               <ButtonComponent
                 cls="ml-6"
                 color="primary"
-                link="/en/configure/upload"
+                link="/configure/upload"
               >
                 Create Case
                 <ArrowRight className="text-white h-5 w-5 ml-1.5" />

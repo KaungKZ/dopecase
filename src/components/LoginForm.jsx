@@ -7,7 +7,8 @@ import { TextInput, PasswordInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import ButtonComponent from "./ButtonComponent";
 import GoogleButton from "./GoogleButton";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+
 import { useRouter } from "next/navigation";
 import { ConnectedFocusError } from "focus-formik-error";
 import { signIn } from "next-auth/react";

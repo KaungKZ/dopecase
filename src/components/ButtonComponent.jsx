@@ -4,7 +4,8 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@mantine/core";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+
 import { cn } from "../lib/utils";
 
 export default function ButtonComponent({

@@ -7,7 +7,8 @@ import {
   prices,
   currency,
 } from "../../../../lib/config/products.js";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+
 import Image from "next/image";
 import { Check, ArrowRight } from "lucide-react";
 import ButtonComponent from "@/components/ButtonComponent.jsx";

@@ -35,7 +35,7 @@ export default function UserAccountNav({ username, isAdmin }) {
           <div
             ref={ref}
             className={cn(
-              "absolute top-[30px] w-full left-0 bg-white rounded shadow py-0 px-3 border-[#aedbb6] border opacity-0 transition pointer-events-none xsmmx:-left-[23px] xsmmx:min-w-fit xsmmx:right-0",
+              "absolute flex flex-col top-[30px] min-w-fit left-0 bg-white rounded shadow py-0 px-3 border-[#aedbb6] border opacity-0 transition pointer-events-none xsmmx:-left-[23px] xsmmx:min-w-fit xsmmx:right-0",
               {
                 "opacity-1 pointer-events-auto": activeDropdown,
               }
@@ -43,13 +43,21 @@ export default function UserAccountNav({ username, isAdmin }) {
           >
             <ButtonComponent
               transparent
+              link="/user/orders"
+              cls="text-sm px-0 font-recursive-button font-medium text-zinc-500 hover:bg-accent text-foreground/80 flex justify-start h-full py-2"
+            >
+              Orders
+            </ButtonComponent>
+            <ButtonComponent
+              transparent
               onClick={() => {
                 signOut();
               }}
-              cls="text-xs px-0 font-recursive-button font-medium text-zinc-500 hover:bg-accent text-foreground/80"
+              cls="text-sm px-0 font-recursive-button font-medium text-zinc-500 hover:bg-accent text-foreground/80 flex justify-start h-full py-2"
             >
               Sign Out
             </ButtonComponent>
+
             {isAdmin && (
               <div className="hidden xsmmx:block">
                 <ButtonComponent

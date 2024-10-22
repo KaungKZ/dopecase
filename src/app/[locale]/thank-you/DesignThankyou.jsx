@@ -270,7 +270,7 @@ export default function DesignThankyou() {
               Back to home
             </ButtonComponent>
 
-            <ButtonComponent link="/en/configure/upload">
+            <ButtonComponent link="/configure/upload">
               Make Another Case
             </ButtonComponent>
           </div>
