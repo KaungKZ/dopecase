@@ -6,7 +6,8 @@ import * as Yup from "yup";
 import { TextInput, PasswordInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import ButtonComponent from "./ButtonComponent";
-import GoogleButton from "./GoogleButton";
+import { GoogleButton, GithubButton } from "./oauthButtons";
+
 import { Link } from "@/i18n/routing";
 
 import { useRouter } from "next/navigation";
@@ -16,6 +17,7 @@ import { signIn } from "next-auth/react";
 export default function LoginForm() {
   const [visible, { toggle }] = useDisclosure(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [formErr, setFormErr] = useState("");
   const router = useRouter();
   const validationSchema = Yup.object({
     username: Yup.string()
@@ -34,13 +36,12 @@ export default function LoginForm() {
 
     setIsLoading(false);
 
-    console.log(signInData);
     if (signInData.error) {
       console.log(signInData.error);
+      setFormErr(signInData.error);
     } else {
       const redirectURL = localStorage.getItem("redirectURL");
 
-      console.log(redirectURL);
       if (redirectURL) {
         if (!redirectURL.includes("/auth/register")) {
           router.push(redirectURL);
@@ -127,8 +128,9 @@ export default function LoginForm() {
             Or
           </span>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center space-x-6">
           <GoogleButton></GoogleButton>
+          <GithubButton></GithubButton>
         </div>
         <span className="text-center block mt-4 text-sm">
           No account ?{" "}

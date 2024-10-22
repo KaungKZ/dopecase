@@ -6,7 +6,8 @@ import * as Yup from "yup";
 import { TextInput, PasswordInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import ButtonComponent from "./ButtonComponent";
-import GoogleButton from "./GoogleButton";
+import { GoogleButton, GithubButton } from "./oauthButtons.jsx";
+
 import { Link } from "@/i18n/routing";
 
 import { useRouter } from "next/navigation";
@@ -152,8 +153,9 @@ export default function SignupForm() {
             Or
           </span>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center space-x-6">
           <GoogleButton></GoogleButton>
+          <GithubButton></GithubButton>
         </div>
         <span className="text-center block mt-4 text-sm">
           Already have an account ?{" "}

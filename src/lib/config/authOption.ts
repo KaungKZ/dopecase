@@ -1,6 +1,7 @@
 import { NextAuthOptions, AuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { db } from "@/db";
@@ -9,6 +10,9 @@ const bcrypt = require("bcryptjs");
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+
+const GITHUB_CLIENT_ID = process.env.AUTH_GITHUB_ID;
+const GITHUB_CLIENT_SECRET = process.env.AUTH_GITHUB_SECRET;
 
 export const authOption: NextAuthOptions = {
   adapter: PrismaAdapter(db),
@@ -34,6 +38,11 @@ export const authOption: NextAuthOptions = {
           username: null, // because user sign in with oauth
         };
       },
+    }),
+    GithubProvider({
+      clientId: GITHUB_CLIENT_ID || "",
+      clientSecret: GITHUB_CLIENT_SECRET || "",
+      allowDangerousEmailAccountLinking: true,
     }),
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")

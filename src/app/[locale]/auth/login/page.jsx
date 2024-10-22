@@ -16,7 +16,7 @@ export default function Page() {
               src="/snake-1.png"
               width={50}
               height={50}
-              className="ml-2"
+              className="ml-2 xsmmx:hidden"
               alt="register-icon"
             />
           </div>

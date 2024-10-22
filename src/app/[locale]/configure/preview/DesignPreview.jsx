@@ -14,7 +14,7 @@ import { Check, ArrowRight } from "lucide-react";
 import ButtonComponent from "@/components/ButtonComponent.jsx";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import GoogleButton from "@/components/GoogleButton.jsx";
+import { GoogleButton } from "../../../../components/oauthButtons.jsx";
 import { TextInput, PasswordInput, ScrollArea } from "@mantine/core";
 import { ConnectedFocusError } from "focus-formik-error";
 import { signIn, useSession } from "next-auth/react";

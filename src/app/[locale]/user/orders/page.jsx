@@ -16,12 +16,11 @@ export default async function Page() {
       createdAt: "desc",
     },
     include: {
-      user: true,
+      configuration: true,
       shippingAddress: true,
     },
   });
 
-  console.log(orders);
   return (
     <section>
       <MaxWidthWrapper>
